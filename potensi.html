@@ -156,6 +156,11 @@ footer{
   .navlinks.open{display:flex;}
   .menu-toggle{display:block;}
   .pagehero h1{font-size:30px;}
+   section [style*="grid-template-columns:repeat(2"],
+section [style*="grid-template-columns:repeat(3"],
+section [style*="grid-template-columns:repeat(4"]{
+  grid-template-columns:1fr !important;
+   }
 }
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important; transition:none !important;}
