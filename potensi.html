@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Potensi — Semparuk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   DESA SEMPARUK — Situs Profil Desa
+   Palet: putih bersih + hijau padi + emas panen
+   ============================================ */
+
+:root{
+  --white: #ffffff;
+  --cream: #fbfaf5;
+  --ink: #20301f;
+  --muted: #647461;
+  --green: #2f6b4f;
+  --green-deep: #1c4432;
+  --green-soft: #dfeee5;
+  --gold: #bf9433;
+  --gold-soft: #f3e4b8;
+  --line: rgba(47,107,79,0.14);
+  --glass: rgba(255,255,255,0.78);
+  --shadow: 0 20px 50px rgba(28,68,50,0.10);
+  --radius: 20px;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Plus Jakarta Sans', sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(47,107,79,0.07), transparent 40%),
+    radial-gradient(circle at 95% 18%, rgba(191,148,51,0.08), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(47,107,79,0.05), transparent 50%),
+    var(--white);
+  background-attachment:fixed;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Fraunces', serif; letter-spacing:-0.01em; color:var(--ink); font-weight:600;}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.container{max-width:1080px; margin:0 auto; padding:0 24px;}
+::selection{background:var(--gold-soft); color:var(--green-deep);}
+
+/* ===== Motif pembatas (songket zig-zag) ===== */
+.motif{
+  height:14px;
+  width:100%;
+  background-image: linear-gradient(135deg, var(--gold) 25%, transparent 25%),
+                     linear-gradient(225deg, var(--gold) 25%, transparent 25%),
+                     linear-gradient(45deg, var(--green) 25%, transparent 25%),
+                     linear-gradient(315deg, var(--green) 25%, transparent 25%);
+  background-position: 0 0, 7px 0, 0 0, 7px 0;
+  background-size: 14px 14px;
+  background-repeat: repeat-x;
+  opacity:0.55;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.navinner{
+  display:flex; align-items:center; justify-content:space-between;
+  max-width:1080px; margin:0 auto; padding:16px 24px;
+}
+.brand{display:flex; align-items:center; gap:12px;}
+.emblem{width:40px; height:40px; flex-shrink:0;}
+.brand-text{line-height:1.2;}
+.brand-text .name{font-family:'Fraunces', serif; font-weight:600; font-size:16.5px; color:var(--green-deep);}
+.brand-text .loc{font-size:11px; color:var(--muted); letter-spacing:0.03em;}
+.navlinks{display:flex; gap:28px; font-size:14.5px; font-weight:600; color:var(--muted);}
+.navlinks a{transition:color .2s; position:relative; padding:4px 0;}
+.navlinks a:hover, .navlinks a.active{color:var(--green);}
+.navlinks a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-3px; height:2px;
+  background:var(--gold);
+}
+.menu-toggle{display:none; background:none; border:1px solid var(--line); color:var(--ink); width:38px; height:38px; border-radius:8px; font-size:18px; cursor:pointer;}
+
+/* ===== Page hero (untuk halaman selain beranda) ===== */
+.pagehero{
+  padding:64px 0 50px; text-align:center;
+  border-bottom:1px solid var(--line);
+}
+.pagehero .eyebrow{
+  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
+}
+.pagehero h1{font-size:38px;}
+.pagehero p{color:var(--muted); max-width:520px; margin:14px auto 0; font-size:15.5px;}
+
+section{position:relative; z-index:1; padding:70px 0;}
+.section-head{margin-bottom:40px;}
+.section-head.center{text-align:center;}
+.section-head .tag{
+  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
+}
+.section-head h2{font-size:30px;}
+.section-head p{color:var(--muted); margin-top:10px; font-size:15px; max-width:560px;}
+
+/* ===== Cards ===== */
+.card{
+  background:var(--glass); backdrop-filter:blur(10px);
+  border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.card.pad{padding:30px;}
+
+/* ===== Buttons ===== */
+.btn{
+  padding:13px 26px; border-radius:100px; font-weight:600; font-size:14.5px;
+  cursor:pointer; transition:transform .2s, box-shadow .2s; display:inline-block;
+}
+.btn-primary{background:linear-gradient(90deg, var(--green-deep), var(--green)); color:#fff; box-shadow:0 10px 24px rgba(47,107,79,0.3);}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(47,107,79,0.4);}
+.btn-outline{background:var(--white); border:1.5px solid var(--green); color:var(--green-deep);}
+.btn-outline:hover{transform:translateY(-2px); background:var(--green-soft);}
+.btnrow{display:flex; gap:14px; flex-wrap:wrap;}
+
+/* ===== Reveal on scroll ===== */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+.reveal.in{opacity:1; transform:none;}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--green-deep); color:#e8f0ea; padding:50px 0 26px; position:relative; z-index:1;
+}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:36px;}
+.footer-grid h4{color:#fff; font-size:15px; margin-bottom:14px; font-family:'Plus Jakarta Sans', sans-serif; font-weight:700;}
+.footer-brand{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+.footer-brand .name{font-family:'Fraunces', serif; font-weight:600; font-size:18px; color:#fff;}
+.footer-grid p, .footer-grid a{color:#c7dcce; font-size:13.5px; line-height:1.9;}
+.footer-grid a:hover{color:var(--gold-soft);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.14); padding-top:20px;
+  text-align:center; font-size:12.5px; color:#a9c4b7;
+}
+
+@media (max-width:860px){
+  .footer-grid{grid-template-columns:1fr; gap:26px;}
+  .navlinks{
+    position:fixed; top:72px; left:0; right:0; background:#fff;
+    border-bottom:1px solid var(--line); flex-direction:column; padding:18px 24px; gap:16px; display:none;
+  }
+  .navlinks.open{display:flex;}
+  .menu-toggle{display:block;}
+  .pagehero h1{font-size:30px;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important;}
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navinner">
+    <a class="brand" href="index.html">
+      <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="23" fill="#fbfaf5" stroke="#bf9433" stroke-width="1.5"/>
+        <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#2f6b4f"/>
+        <path d="M24 26v12" stroke="#2f6b4f" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">
+        <span class="name" style="display:block;">Semparuk</span>
+        <span class="loc">Kec. Semparuk · Kab. Sambas</span>
+      </span>
+    </a>
+    <div class="navlinks" id="navlinks">
+      <a href="index.html">Beranda</a>
+      <a href="tentang.html">Profil Desa</a>
+      <a href="potensi.html" class="active">Potensi</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="kontak.html">Kontak</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+</nav>
+<div class="motif"></div>
+
+<section class="pagehero">
+  <div class="container">
+    <span class="eyebrow reveal in">Potensi Desa</span>
+    <h1 class="reveal in">Kekayaan Semparuk</h1>
+    <p class="reveal in">Sumber daya alam, ekonomi, dan budaya yang menjadi tulang punggung kehidupan warga.</p>
+  </div>
+</section>
+
+<!-- PERTANIAN -->
+<section>
+  <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;">
+    <div class="card reveal" style="overflow:hidden; aspect-ratio:4/3; order:2;">
+      <img src="foto-sawah.jpg" alt="Sawah padi di Semparuk" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="reveal" style="order:1;">
+      <span class="section-head tag">Pertanian</span>
+      <h2 style="font-size:26px; margin-bottom:14px;">Padi, Jagung & Jeruk</h2>
+      <p style="color:var(--muted); margin-bottom:14px;">Sebagian besar lahan di Semparuk merupakan dataran rendah yang subur, sekitar 62% dari luas wilayahnya dimanfaatkan untuk pertanian. Padi sawah masih jadi tanaman utama, ditambah tanaman pangan seperti jagung yang belakangan mulai digalakkan lewat program ketahanan pangan.</p>
+      <p style="color:var(--muted);">Tanahnya juga cocok untuk perkebunan jeruk — sejalan dengan nama besar Kabupaten Sambas sebagai penghasil jeruk Sambas (Siam Pontianak) yang dikenal hingga luar daerah.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PERKEBUNAN -->
+<section style="background:var(--cream);">
+  <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;">
+    <div class="reveal">
+      <span class="section-head tag">Perkebunan</span>
+      <h2 style="font-size:26px; margin-bottom:14px;">Kelapa, Karet & Hasil Kebun</h2>
+      <p style="color:var(--muted); margin-bottom:14px;">Selain sawah, warga juga mengelola kebun kelapa, karet, dan tanaman lain secara turun-temurun. Sekitar 27% wilayah Semparuk dipakai untuk perkebunan, menjadikannya sumber penghasilan tambahan bagi banyak keluarga di luar musim tanam padi.</p>
+      <p style="color:var(--muted);">Letak Semparuk yang diapit sungai — Sungai Sambas Besar di utara dan Sungai Semparuk Sebangkau di selatan — membuat tanahnya subur dan cocok untuk perkebunan campuran seperti ini.</p>
+    </div>
+    <div class="card reveal" style="overflow:hidden; aspect-ratio:4/3;">
+      <img src="foto-kebun.jpg" alt="Perkebunan warga Semparuk" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<div class="motif"></div>
+
+<!-- BUDAYA & PARIWISATA -->
+<section style="background:var(--cream);">
+  <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;">
+    <div class="card reveal" style="overflow:hidden; aspect-ratio:4/3; order:2;">
+      <img src="foto-budaya.jpg" alt="Kegiatan budaya warga Semparuk" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="reveal" style="order:1;">
+      <span class="section-head tag">Budaya</span>
+      <h2 style="font-size:26px; margin-bottom:14px;">Tradisi & Kearifan Lokal</h2>
+      <p style="color:var(--muted); margin-bottom:14px;">Sebagai bagian dari masyarakat Melayu Sambas, warga Semparuk masih menjaga tradisi dan nilai gotong royong dalam kehidupan sehari-hari, mulai dari kerja bakti membersihkan lingkungan sampai kegiatan bersama di masjid dan musala.</p>
+      <p style="color:var(--muted);">Tradisi besar seperti Robo-robo — yang diperingati setiap tahun oleh masyarakat Sambas — juga turut dirayakan warga di sini, biasanya diisi dengan makan bersama dan doa selamat di tepi sungai.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INFRASTRUKTUR -->
+<section>
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="tag">Sarana</span>
+      <h2>Sarana di Semparuk</h2>
+      <p style="margin-left:auto; margin-right:auto;">Sebagai ibu kota kecamatan, Semparuk jadi pusat berbagai fasilitas yang juga melayani desa-desa sekitarnya.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
+      <div class="card pad reveal" style="text-align:center;">
+        <h4 style="font-size:15px; margin-bottom:6px;">Pendidikan</h4>
+        <p style="color:var(--muted); font-size:13px;">Dari TK sampai SMA/SMK, termasuk SDN 12 Semparuk, MTsN 2 Sambas, SMPN 3 Semparuk & SMAN 1 Semparuk</p>
+      </div>
+      <div class="card pad reveal" style="text-align:center;">
+        <h4 style="font-size:15px; margin-bottom:6px;">Kesehatan</h4>
+        <p style="color:var(--muted); font-size:13px;">Puskesmas Semparuk di Jl. Tunas Baru, melayani warga sekecamatan</p>
+      </div>
+      <div class="card pad reveal" style="text-align:center;">
+        <h4 style="font-size:15px; margin-bottom:6px;">Ibadah</h4>
+        <p style="color:var(--muted); font-size:13px;">Masjid & musala tersebar di tiap kawasan permukiman</p>
+      </div>
+      <div class="card pad reveal" style="text-align:center;">
+        <h4 style="font-size:15px; margin-bottom:6px;">Jalan</h4>
+        <p style="color:var(--muted); font-size:13px;">Dilalui Jalan Raya Semparuk, jalur utama penghubung Pemangkat–Tebas–Kota Sambas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="motif"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="23" fill="#1c4432" stroke="#bf9433" stroke-width="1.5"/>
+            <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#f3e4b8"/>
+            <path d="M24 26v12" stroke="#f3e4b8" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="name">Semparuk</span>
+        </div>
+        <p>Kecamatan Semparuk, Kabupaten Sambas,<br>Provinsi Kalimantan Barat, Indonesia.</p>
+      </div>
+      <div>
+        <h4>Jelajahi</h4>
+        <p>
+          <a href="index.html">Beranda</a><br>
+          <a href="tentang.html">Profil Desa</a><br>
+          <a href="potensi.html">Potensi Desa</a><br>
+          <a href="galeri.html">Galeri</a><br>
+          <a href="kontak.html">Kontak</a>
+        </p>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <p>Kantor Desa Semparuk<br>53RR+33H, Semparuk<br>Kec. Semparuk, Kab. Sambas 79461</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Semparuk. Seluruh hak dilindungi.</div>
+  </div>
+</footer>
+
+<script>
+// Reveal saat discroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Toggle menu mobile
+const menuToggle = document.getElementById('menuToggle');
+const navLinksEl = document.getElementById('navlinks');
+if (menuToggle && navLinksEl) {
+  menuToggle.addEventListener('click', () => navLinksEl.classList.toggle('open'));
+  navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinksEl.classList.remove('open')));
+}
+
+</script>
+</body>
+</html>
