@@ -1,431 +1,83 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kontak — Semparuk</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-/* ============================================
-   DESA SEMPARUK — Situs Profil Desa
-   Palet: putih bersih + hijau padi + emas panen
-   ============================================ */
+<!-- ============================================= -->
+<!-- TARUH INI DI kontak.html SAJA                  -->
+<!-- (ganti bagian form Buku Tamu yang lama kalau sudah ada) -->
+<!-- ============================================= -->
 
-:root{
-  --white: #ffffff;
-  --cream: #fbfaf5;
-  --ink: #20301f;
-  --muted: #647461;
-  --green: #2f6b4f;
-  --green-deep: #1c4432;
-  --green-soft: #dfeee5;
-  --gold: #bf9433;
-  --gold-soft: #f3e4b8;
-  --line: rgba(47,107,79,0.14);
-  --glass: rgba(255,255,255,0.78);
-  --shadow: 0 20px 50px rgba(28,68,50,0.10);
-  --radius: 20px;
-}
+<div class="reveal card pad" style="margin-top:24px;">
+  <h3 style="font-size:17px; margin-bottom:14px; color:var(--green-deep);">📝 Buku Tamu</h3>
 
-*{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Plus Jakarta Sans', sans-serif;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at 8% 8%, rgba(47,107,79,0.07), transparent 40%),
-    radial-gradient(circle at 95% 18%, rgba(191,148,51,0.08), transparent 42%),
-    radial-gradient(circle at 50% 100%, rgba(47,107,79,0.05), transparent 50%),
-    var(--white);
-  background-attachment:fixed;
-  line-height:1.65;
-  overflow-x:hidden;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
+  <form id="formTamu" style="display:grid; gap:10px; margin-bottom:20px; max-width:420px;">
+    <input type="text" id="inputNama" placeholder="Nama Anda" required
+      style="padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:14px;">
+    <textarea id="inputPesan" placeholder="Tulis pesan atau kesan Anda" required rows="3"
+      style="padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:14px; resize:vertical;"></textarea>
+    <button type="submit" class="btn"
+      style="justify-self:start; background:var(--green-deep); color:#fff; border:none; padding:10px 22px; border-radius:8px; font-size:14px; cursor:pointer;">
+      Kirim Pesan
+    </button>
+    <span id="statusKirim" style="font-size:13px; color:var(--muted);"></span>
+  </form>
 
-h1,h2,h3,h4{font-family:'Fraunces', serif; letter-spacing:-0.01em; color:var(--ink); font-weight:600;}
-a{color:inherit; text-decoration:none;}
-img{max-width:100%; display:block;}
-.container{max-width:1080px; margin:0 auto; padding:0 24px;}
-::selection{background:var(--gold-soft); color:var(--green-deep);}
-
-/* ===== Motif pembatas (songket zig-zag) ===== */
-.motif{
-  height:14px;
-  width:100%;
-  background-image: linear-gradient(135deg, var(--gold) 25%, transparent 25%),
-                     linear-gradient(225deg, var(--gold) 25%, transparent 25%),
-                     linear-gradient(45deg, var(--green) 25%, transparent 25%),
-                     linear-gradient(315deg, var(--green) 25%, transparent 25%);
-  background-position: 0 0, 7px 0, 0 0, 7px 0;
-  background-size: 14px 14px;
-  background-repeat: repeat-x;
-  opacity:0.55;
-}
-
-/* ===== NAV ===== */
-nav{
-  position:sticky; top:0; z-index:50;
-  background:rgba(255,255,255,0.88);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
-.navinner{
-  display:flex; align-items:center; justify-content:space-between;
-  max-width:1080px; margin:0 auto; padding:16px 24px;
-}
-.brand{display:flex; align-items:center; gap:12px;}
-.emblem{width:40px; height:40px; flex-shrink:0;}
-.brand-text{line-height:1.2;}
-.brand-text .name{font-family:'Fraunces', serif; font-weight:600; font-size:16.5px; color:var(--green-deep);}
-.brand-text .loc{font-size:11px; color:var(--muted); letter-spacing:0.03em;}
-.navlinks{display:flex; gap:28px; font-size:14.5px; font-weight:600; color:var(--muted);}
-.navlinks a{transition:color .2s; position:relative; padding:4px 0;}
-.navlinks a:hover, .navlinks a.active{color:var(--green);}
-.navlinks a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-3px; height:2px;
-  background:var(--gold);
-}
-.menu-toggle{display:none; background:none; border:1px solid var(--line); color:var(--ink); width:38px; height:38px; border-radius:8px; font-size:18px; cursor:pointer;}
-
-/* ===== Page hero (untuk halaman selain beranda) ===== */
-.pagehero{
-  padding:64px 0 50px; text-align:center;
-  border-bottom:1px solid var(--line);
-}
-.pagehero .eyebrow{
-  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
-  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
-}
-.pagehero h1{font-size:38px;}
-.pagehero p{color:var(--muted); max-width:520px; margin:14px auto 0; font-size:15.5px;}
-
-section{position:relative; z-index:1; padding:70px 0;}
-.section-head{margin-bottom:40px;}
-.section-head.center{text-align:center;}
-.section-head .tag{
-  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
-  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
-}
-.section-head h2{font-size:30px;}
-.section-head p{color:var(--muted); margin-top:10px; font-size:15px; max-width:560px;}
-
-/* ===== Cards ===== */
-.card{
-  background:var(--glass); backdrop-filter:blur(10px);
-  border:1px solid var(--line); border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
-.card.pad{padding:30px;}
-
-/* ===== Buttons ===== */
-.btn{
-  padding:13px 26px; border-radius:100px; font-weight:600; font-size:14.5px;
-  cursor:pointer; transition:transform .2s, box-shadow .2s; display:inline-block;
-  border:none; font-family:inherit;
-}
-.btn-primary{background:linear-gradient(90deg, var(--green-deep), var(--green)); color:#fff; box-shadow:0 10px 24px rgba(47,107,79,0.3);}
-.btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(47,107,79,0.4);}
-.btn-primary:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
-.btn-outline{background:var(--white); border:1.5px solid var(--green); color:var(--green-deep);}
-.btn-outline:hover{transform:translateY(-2px); background:var(--green-soft);}
-.btnrow{display:flex; gap:14px; flex-wrap:wrap;}
-
-/* ===== Reveal on scroll ===== */
-.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
-.reveal.in{opacity:1; transform:none;}
-
-/* ===== Buku Tamu ===== */
-.guestbook-form{display:grid; gap:14px; margin-bottom:8px;}
-.guestbook-form input,
-.guestbook-form textarea{
-  width:100%; padding:13px 16px; border-radius:12px;
-  border:1.5px solid var(--line); font-family:inherit; font-size:14.5px;
-  background:var(--white); color:var(--ink); resize:vertical;
-}
-.guestbook-form input:focus,
-.guestbook-form textarea:focus{outline:none; border-color:var(--green);}
-.guestbook-status{font-size:13.5px; margin-top:10px; min-height:18px;}
-.guestbook-status.ok{color:var(--green-deep);}
-.guestbook-status.err{color:#a33;}
-.guestbook-list{display:grid; gap:14px; margin-top:10px;}
-.guestbook-item{
-  border-bottom:1px solid var(--line); padding-bottom:14px;
-}
-.guestbook-item:last-child{border-bottom:none; padding-bottom:0;}
-.guestbook-item .gname{font-weight:700; font-size:14.5px; color:var(--green-deep);}
-.guestbook-item .gtime{font-size:12px; color:var(--muted); margin-left:8px;}
-.guestbook-item .gmsg{font-size:14px; color:var(--ink); margin-top:4px;}
-.guestbook-empty{color:var(--muted); font-size:14px;}
-
-/* ===== Footer ===== */
-footer{
-  background:var(--green-deep); color:#e8f0ea; padding:50px 0 26px; position:relative; z-index:1;
-}
-.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:36px;}
-.footer-grid h4{color:#fff; font-size:15px; margin-bottom:14px; font-family:'Plus Jakarta Sans', sans-serif; font-weight:700;}
-.footer-brand{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
-.footer-brand .name{font-family:'Fraunces', serif; font-weight:600; font-size:18px; color:#fff;}
-.footer-grid p, .footer-grid a{color:#c7dcce; font-size:13.5px; line-height:1.9;}
-.footer-grid a:hover{color:var(--gold-soft);}
-.footer-bottom{
-  border-top:1px solid rgba(255,255,255,0.14); padding-top:20px;
-  text-align:center; font-size:12.5px; color:#a9c4b7;
-}
-
-@media (max-width:860px){
-  .footer-grid{grid-template-columns:1fr; gap:26px;}
-  .navlinks{
-    position:fixed; top:72px; left:0; right:0; background:#fff;
-    border-bottom:1px solid var(--line); flex-direction:column; padding:18px 24px; gap:16px; display:none;
-  }
-  .navlinks.open{display:flex;}
-  .menu-toggle{display:block;}
-  .pagehero h1{font-size:30px;}
-}
-@media (prefers-reduced-motion: reduce){
-  *{animation:none !important; transition:none !important;}
-}
-
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="navinner">
-    <a class="brand" href="index.html">
-      <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="23" fill="#fbfaf5" stroke="#bf9433" stroke-width="1.5"/>
-        <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#2f6b4f"/>
-        <path d="M24 26v12" stroke="#2f6b4f" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-      </svg>
-      <span class="brand-text">
-        <span class="name" style="display:block;">Semparuk</span>
-        <span class="loc">Kec. Semparuk · Kab. Sambas</span>
-      </span>
-    </a>
-    <div class="navlinks" id="navlinks">
-      <a href="index.html">Beranda</a>
-      <a href="tentang.html">Profil Desa</a>
-      <a href="potensi.html">Potensi</a>
-      <a href="galeri.html">Galeri</a>
-      <a href="kontak.html" class="active">Kontak</a>
-    </div>
-    <button class="menu-toggle" id="menuToggle">☰</button>
+  <div id="daftarTamu" style="display:grid; gap:12px;">
+    <p style="color:var(--muted); font-size:13.5px;">Memuat pesan...</p>
   </div>
-</nav>
-   
-<div class="motif"></div>
-   
-<section class="pagehero">
-  <div class="container">
-    <span class="eyebrow reveal in">Hubungi Kami</span>
-    <h1 class="reveal in">Kontak Semparuk</h1>
-    <p class="reveal in">Butuh informasi atau ingin berkunjung ke Kantor Desa? Silahkan kunjungi alamat tersebut.</p>
-  </div>
-</section>
-
-<section>
-  <div class="container" style="display:grid; gap:30px;">
-    <div class="reveal card" style="overflow:hidden; aspect-ratio:4/3;">
-      <iframe
-        src="https://www.google.com/maps?q=Jalan+Abdul+Razak,+RT+20/RW+07,+Semparuk,+Kabupaten+Sambas,+Kalimantan+Barat,+79457&output=embed"
-        style="width:100%; height:100%; border:0;"
-        loading="lazy"
-        title="Peta lokasi Semparuk">
-      </iframe>
-    </div>
-
-    <div class="reveal" style="display:grid; grid-template-columns:repeat(2,1fr); gap:18px;">
-      <div class="card pad">
-        <h3 style="font-size:15.5px; margin-bottom:6px;">📍 Alamat Kantor Desa</h3>
-        <p style="color:var(--muted); font-size:14px;">53RR+33H, Semparuk<br>Kecamatan Semparuk, Kabupaten Sambas,<br>Kalimantan Barat 79461</p>
-      </div>
-      <div class="card pad">
-        <h3 style="font-size:15.5px; margin-bottom:6px;">🕒 Jam Pelayanan</h3>
-        <p style="color:var(--muted); font-size:14px;">Senin – Jumat, 07.00 – 15.00 WIB<br>(sewaktu-waktu dapat berubah)</p>
-      </div>
-       <div class="card pad">
-  <h3 style="font-size:15.5px; margin-bottom:6px;">🚗 Cara Menuju Lokasi</h3>
-  <p style="color:var(--muted); font-size:14px;">Kantor Desa berada di tepi Jalan Raya Semparuk, jalur utama yang menghubungkan Pemangkat, Tebas, dan Kota Sambas.</p>
-       </div>
-<div class="card pad">
-  <h3 style="font-size:15.5px; margin-bottom:6px;">💬 Catatan Kunjungan</h3>
-  <p style="color:var(--muted); font-size:14px;">Di luar jam pelayanan, silakan datang kembali pada hari dan jam kerja berikutnya.</p>
 </div>
-       <div class="card pad">
-  <h3 style="font-size:15.5px; margin-bottom:6px;">🏛️ Kantor Kecamatan Semparuk</h3>
-  <p style="color:var(--muted); font-size:14px;">Melayani urusan administrasi tingkat kecamatan bagi warga Semparuk dan desa-desa sekitarnya.</p>
-</div>
-<div class="card pad">
-  <h3 style="font-size:15.5px; margin-bottom:6px;">🚗 Rute Menuju Kantor Camat</h3>
-  <p style="color:var(--muted); font-size:14px;">Kantor Camat Semparuk berada tidak jauh dari Kantor Desa, masih di sepanjang Jalan Raya Semparuk yang menghubungkan Pemangkat–Tebas–Kota Sambas.</p>
-</div>
-    </div>
-
-    <!-- ===== BUKU TAMU (terhubung ke Google Sheets via Apps Script) ===== -->
-    <div class="reveal card pad" id="buku-tamu">
-      <h3 style="font-size:20px; margin-bottom:6px;">📖 Buku Tamu</h3>
-      <p style="color:var(--muted); font-size:14px; margin-bottom:20px;">Tinggalkan nama dan pesan untuk Desa Semparuk. Pesan kamu akan langsung tersimpan dan tampil di bawah.</p>
-
-      <form class="guestbook-form" id="guestbookForm">
-        <input type="text" id="gbNama" placeholder="Nama kamu" required maxlength="80">
-        <textarea id="gbPesan" placeholder="Tulis pesan atau kesan kamu di sini..." rows="3" required maxlength="500"></textarea>
-        <div class="btnrow">
-          <button type="submit" class="btn btn-primary" id="gbSubmitBtn">Kirim Pesan</button>
-        </div>
-        <div class="guestbook-status" id="gbStatus"></div>
-      </form>
-
-      <div class="guestbook-list" id="guestbookList">
-        <p class="guestbook-empty">Memuat buku tamu...</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="motif"></div>
-
-<footer style="margin-top:auto;">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">
-          <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="23" fill="#1c4432" stroke="#bf9433" stroke-width="1.5"/>
-            <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#f3e4b8"/>
-            <path d="M24 26v12" stroke="#f3e4b8" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          </svg>
-          <span class="name">Semparuk</span>
-        </div>
-        <p>Kecamatan Semparuk, Kabupaten Sambas,<br>Provinsi Kalimantan Barat, Indonesia.</p>
-      </div>
-      <div>
-        <h4>Jelajahi</h4>
-        <p>
-          <a href="index.html">Beranda</a><br>
-          <a href="tentang.html">Profil Desa</a><br>
-          <a href="potensi.html">Potensi Desa</a><br>
-          <a href="galeri.html">Galeri</a><br>
-          <a href="kontak.html">Kontak</a>
-        </p>
-      </div>
-      <div>
-        <h4>Kontak</h4>
-        <p>Kantor Desa Semparuk<br>53RR+33H, Semparuk<br>Kec. Semparuk, Kab. Sambas 79461</p>
-      </div>
-    </div>
-    <div class="footer-bottom">© 2026 Semparuk. Seluruh hak dilindungi.</div>
-  </div>
-</footer>
 
 <script>
-// Reveal saat discroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymL6I6mK7WWk9nxc1uN9f3k_5hx8plebhbkZqCCwfNp-OFpqomRaqa36rx9VjuBzRnkQ/exec";
 
-// Toggle menu mobile
-const menuToggle = document.getElementById('menuToggle');
-const navLinksEl = document.getElementById('navlinks');
-if (menuToggle && navLinksEl) {
-  menuToggle.addEventListener('click', () => navLinksEl.classList.toggle('open'));
-  navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinksEl.classList.remove('open')));
-}
-
-// ===== BUKU TAMU: terhubung ke Google Apps Script Web App =====
-const GUESTBOOK_API_URL = "https://script.google.com/macros/s/AKfycbymL6I6mK7WWk9nxc1uN9f3k_5hx8plebhbkZqCCwfNp-OFpqomRaqa36rx9VjuBzRnkQ/exec";
-
-const gbForm = document.getElementById('guestbookForm');
-const gbStatus = document.getElementById('gbStatus');
-const gbList = document.getElementById('guestbookList');
-const gbSubmitBtn = document.getElementById('gbSubmitBtn');
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-function renderGuestbook(entries) {
-  if (!entries || entries.length === 0) {
-    gbList.innerHTML = '<p class="guestbook-empty">Belum ada pesan. Jadilah yang pertama menulis di buku tamu ini!</p>';
-    return;
-  }
-  // Tampilkan yang terbaru dulu
-  const sorted = entries.slice().reverse();
-  gbList.innerHTML = sorted.map(item => {
-    const nama = escapeHtml(item.Nama || item.nama || 'Anonim');
-    const pesan = escapeHtml(item.Pesan || item.pesan || '');
-    let waktu = item.Timestamp || item.timestamp || '';
+  async function muatBukuTamu() {
+    const wadah = document.getElementById('daftarTamu');
     try {
-      const d = new Date(waktu);
-      if (!isNaN(d)) {
-        waktu = d.toLocaleString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const res = await fetch(SCRIPT_URL);
+      const data = await res.json();
+
+      if (data.status === "error") {
+        wadah.innerHTML = '<p style="color:var(--muted); font-size:13.5px;">Gagal memuat: ' + data.message + '</p>';
+        return;
       }
-    } catch (e) {}
-    return `<div class="guestbook-item">
-      <span class="gname">${nama}</span><span class="gtime">${waktu}</span>
-      <div class="gmsg">${pesan}</div>
-    </div>`;
-  }).join('');
-}
+      if (data.length === 0) {
+        wadah.innerHTML = '<p style="color:var(--muted); font-size:13.5px;">Belum ada pesan. Jadilah yang pertama menulis!</p>';
+        return;
+      }
 
-function loadGuestbook() {
-  fetch(GUESTBOOK_API_URL)
-    .then(res => res.json())
-    .then(data => {
-      renderGuestbook(data);
-    })
-    .catch(err => {
-      gbList.innerHTML = '<p class="guestbook-empty">Gagal memuat buku tamu. Coba muat ulang halaman.</p>';
-      console.error(err);
-    });
-}
+      wadah.innerHTML = data.reverse().map(item => `
+        <div style="border-bottom:1px solid var(--line); padding-bottom:10px;">
+          <div style="font-weight:600; font-size:14px; color:var(--green-deep);">${item.nama}</div>
+          <div style="font-size:13.5px; color:var(--muted); margin-top:2px;">${item.pesan}</div>
+        </div>
+      `).join('');
+    } catch (err) {
+      wadah.innerHTML = '<p style="color:var(--muted); font-size:13.5px;">Gagal memuat buku tamu.</p>';
+    }
+  }
 
-if (gbForm) {
-  gbForm.addEventListener('submit', function (e) {
+  document.getElementById('formTamu').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const nama = document.getElementById('gbNama').value.trim();
-    const pesan = document.getElementById('gbPesan').value.trim();
-    if (!nama || !pesan) return;
+    const nama = document.getElementById('inputNama').value.trim();
+    const pesan = document.getElementById('inputPesan').value.trim();
+    const status = document.getElementById('statusKirim');
+    status.textContent = "Mengirim...";
 
-    gbSubmitBtn.disabled = true;
-    gbSubmitBtn.textContent = 'Mengirim...';
-    gbStatus.textContent = '';
-    gbStatus.className = 'guestbook-status';
-
-    fetch(GUESTBOOK_API_URL, {
-      method: 'POST',
-      body: JSON.stringify({ nama: nama, pesan: pesan })
-    })
-      .then(res => res.json())
-      .then(() => {
-        gbStatus.textContent = 'Terima kasih! Pesan kamu sudah tersimpan.';
-        gbStatus.className = 'guestbook-status ok';
-        gbForm.reset();
-        loadGuestbook();
-      })
-      .catch(err => {
-        gbStatus.textContent = 'Gagal mengirim pesan. Coba lagi beberapa saat.';
-        gbStatus.className = 'guestbook-status err';
-        console.error(err);
-      })
-      .finally(() => {
-        gbSubmitBtn.disabled = false;
-        gbSubmitBtn.textContent = 'Kirim Pesan';
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ nama, pesan })
       });
+      const hasil = await res.json();
+
+      if (hasil.status === "success") {
+        status.textContent = "Terkirim, terima kasih!";
+        this.reset();
+        muatBukuTamu();
+      } else {
+        status.textContent = "Gagal: " + hasil.message;
+      }
+    } catch (err) {
+      status.textContent = "Gagal mengirim, coba lagi.";
+    }
   });
 
-  loadGuestbook();
-}
+  muatBukuTamu();
 </script>
-</body>
-</html>
