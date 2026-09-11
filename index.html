@@ -305,7 +305,9 @@ footer{
         <p>Kantor Desa Semparuk<br>53RR+33H, Semparuk<br>Kec. Semparuk, Kab. Sambas 79461</p>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 Semparuk. Seluruh hak dilindungi.</div>
+    <div class="footer-bottom">
+      © 2026 Semparuk. Seluruh hak dilindungi. · Pengunjung: <span id="jmlPengunjung">...</span>
+    </div>
   </div>
 </footer>
 
@@ -325,5 +327,15 @@ if (menuToggle && navLinksEl) {
 }
 
 </script>
+<script>
+fetch("https://script.google.com/macros/s/AKfycbymL6I6mK7WWk9nxc1uN9f3k_5hx8plebhbkZqCCwfNp-OFpqomRaqa36rx9VjuBzRnkQ/exec?action=hitung")
+  .then(res => res.json())
+  .then(data => {
+    const el = document.getElementById('jmlPengunjung');
+    if (el && data.total !== undefined) el.textContent = data.total;
+  })
+  .catch(err => console.error("Gagal ambil data pengunjung:", err));
+</script>
+
 </body>
 </html>
