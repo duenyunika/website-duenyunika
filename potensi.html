@@ -6,6 +6,7 @@
 <title>Potensi — Semparuk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 /* ============================================
    DESA SEMPARUK — Situs Profil Desa
@@ -28,8 +29,16 @@
   --radius: 20px;
 }
 
-*{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:'Plus Jakarta Sans', sans-serif;
   color:var(--ink);
@@ -42,148 +51,395 @@ body{
   line-height:1.65;
   overflow-x:hidden;
 }
-h1,h2,h3,h4{font-family:'Fraunces', serif; letter-spacing:-0.01em; color:var(--ink); font-weight:600;}
-a{color:inherit; text-decoration:none;}
-img{max-width:100%; display:block;}
-.container{max-width:1080px; margin:0 auto; padding:0 24px;}
-::selection{background:var(--gold-soft); color:var(--green-deep);}
+
+h1,h2,h3,h4{
+  font-family:'Fraunces', serif;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+  font-weight:600;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+.container{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+::selection{
+  background:var(--gold-soft);
+  color:var(--green-deep);
+}
 
 /* ===== Motif pembatas (songket zig-zag) ===== */
 .motif{
   height:14px;
   width:100%;
-  background-image: linear-gradient(135deg, var(--gold) 25%, transparent 25%),
-                     linear-gradient(225deg, var(--gold) 25%, transparent 25%),
-                     linear-gradient(45deg, var(--green) 25%, transparent 25%),
-                     linear-gradient(315deg, var(--green) 25%, transparent 25%);
-  background-position: 0 0, 7px 0, 0 0, 7px 0;
-  background-size: 14px 14px;
-  background-repeat: repeat-x;
+  background-image:
+    linear-gradient(135deg, var(--gold) 25%, transparent 25%),
+    linear-gradient(225deg, var(--gold) 25%, transparent 25%),
+    linear-gradient(45deg, var(--green) 25%, transparent 25%),
+    linear-gradient(315deg, var(--green) 25%, transparent 25%);
+  background-position:0 0, 7px 0, 0 0, 7px 0;
+  background-size:14px 14px;
+  background-repeat:repeat-x;
   opacity:0.55;
 }
 
 /* ===== NAV ===== */
 nav{
-  position:sticky; top:0; z-index:50;
+  position:sticky;
+  top:0;
+  z-index:50;
   background:rgba(255,255,255,0.88);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
 }
+
 .navinner{
-  display:flex; align-items:center; justify-content:space-between;
-  max-width:1080px; margin:0 auto; padding:16px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1080px;
+  margin:0 auto;
+  padding:16px 24px;
 }
-.brand{display:flex; align-items:center; gap:12px;}
-.emblem{width:40px; height:40px; flex-shrink:0;}
-.brand-text{line-height:1.2;}
-.brand-text .name{font-family:'Fraunces', serif; font-weight:600; font-size:16.5px; color:var(--green-deep);}
-.brand-text .loc{font-size:11px; color:var(--muted); letter-spacing:0.03em;}
-.navlinks{display:flex; gap:28px; font-size:14.5px; font-weight:600; color:var(--muted);}
-.navlinks a{transition:color .2s; position:relative; padding:4px 0;}
-.navlinks a:hover, .navlinks a.active{color:var(--green);}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.emblem{
+  width:40px;
+  height:40px;
+  flex-shrink:0;
+}
+
+.brand-text{
+  line-height:1.2;
+}
+
+.brand-text .name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:16.5px;
+  color:var(--green-deep);
+}
+
+.brand-text .loc{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.03em;
+}
+
+.navlinks{
+  display:flex;
+  gap:28px;
+  font-size:14.5px;
+  font-weight:600;
+  color:var(--muted);
+}
+
+.navlinks a{
+  transition:color .2s;
+  position:relative;
+  padding:4px 0;
+}
+
+.navlinks a:hover,
+.navlinks a.active{
+  color:var(--green);
+}
+
 .navlinks a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-3px; height:2px;
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-3px;
+  height:2px;
   background:var(--gold);
 }
-.menu-toggle{display:none; background:none; border:1px solid var(--line); color:var(--ink); width:38px; height:38px; border-radius:8px; font-size:18px; cursor:pointer;}
 
-/* ===== Page hero (untuk halaman selain beranda) ===== */
+.menu-toggle{
+  display:none;
+  background:none;
+  border:1px solid var(--line);
+  color:var(--ink);
+  width:38px;
+  height:38px;
+  border-radius:8px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* ===== Page hero ===== */
 .pagehero{
-  padding:64px 0 50px; text-align:center;
+  padding:64px 0 50px;
+  text-align:center;
   border-bottom:1px solid var(--line);
 }
-.pagehero .eyebrow{
-  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
-  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
-}
-.pagehero h1{font-size:38px;}
-.pagehero p{color:var(--muted); max-width:520px; margin:14px auto 0; font-size:15.5px;}
 
-section{position:relative; z-index:1; padding:70px 0;}
-.section-head{margin-bottom:40px;}
-.section-head.center{text-align:center;}
-.section-head .tag{
-  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
-  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
+.pagehero .eyebrow{
+  display:inline-block;
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:10px;
 }
-.section-head h2{font-size:30px;}
-.section-head p{color:var(--muted); margin-top:10px; font-size:15px; max-width:560px;}
+
+.pagehero h1{
+  font-size:38px;
+}
+
+.pagehero p{
+  color:var(--muted);
+  max-width:520px;
+  margin:14px auto 0;
+  font-size:15.5px;
+}
+
+section{
+  position:relative;
+  z-index:1;
+  padding:70px 0;
+}
+
+.section-head{
+  margin-bottom:40px;
+}
+
+.section-head.center{
+  text-align:center;
+}
+
+.section-head .tag{
+  display:inline-block;
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.section-head h2{
+  font-size:30px;
+}
+
+.section-head p{
+  color:var(--muted);
+  margin-top:10px;
+  font-size:15px;
+  max-width:560px;
+}
 
 /* ===== Cards ===== */
 .card{
-  background:var(--glass); backdrop-filter:blur(10px);
-  border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
   box-shadow:var(--shadow);
 }
-.card.pad{padding:30px;}
+
+.card.pad{
+  padding:30px;
+}
 
 /* ===== Buttons ===== */
 .btn{
-  padding:13px 26px; border-radius:100px; font-weight:600; font-size:14.5px;
-  cursor:pointer; transition:transform .2s, box-shadow .2s; display:inline-block;
+  padding:13px 26px;
+  border-radius:100px;
+  font-weight:600;
+  font-size:14.5px;
+  cursor:pointer;
+  transition:transform .2s, box-shadow .2s;
+  display:inline-block;
 }
-.btn-primary{background:linear-gradient(90deg, var(--green-deep), var(--green)); color:#fff; box-shadow:0 10px 24px rgba(47,107,79,0.3);}
-.btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(47,107,79,0.4);}
-.btn-outline{background:var(--white); border:1.5px solid var(--green); color:var(--green-deep);}
-.btn-outline:hover{transform:translateY(-2px); background:var(--green-soft);}
-.btnrow{display:flex; gap:14px; flex-wrap:wrap;}
+
+.btn-primary{
+  background:linear-gradient(90deg, var(--green-deep), var(--green));
+  color:#fff;
+  box-shadow:0 10px 24px rgba(47,107,79,0.3);
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(47,107,79,0.4);
+}
+
+.btn-outline{
+  background:var(--white);
+  border:1.5px solid var(--green);
+  color:var(--green-deep);
+}
+
+.btn-outline:hover{
+  transform:translateY(-2px);
+  background:var(--green-soft);
+}
+
+.btnrow{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
 
 /* ===== Reveal on scroll ===== */
-.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
-.reveal.in{opacity:1; transform:none;}
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.reveal.in{
+  opacity:1;
+  transform:none;
+}
 
 /* ===== Footer ===== */
 footer{
-  background:var(--green-deep); color:#e8f0ea; padding:50px 0 26px; position:relative; z-index:1;
+  background:var(--green-deep);
+  color:#e8f0ea;
+  padding:50px 0 26px;
+  position:relative;
+  z-index:1;
 }
-.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:36px;}
-.footer-grid h4{color:#fff; font-size:15px; margin-bottom:14px; font-family:'Plus Jakarta Sans', sans-serif; font-weight:700;}
-.footer-brand{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
-.footer-brand .name{font-family:'Fraunces', serif; font-weight:600; font-size:18px; color:#fff;}
-.footer-grid p, .footer-grid a{color:#c7dcce; font-size:13.5px; line-height:1.9;}
-.footer-grid a:hover{color:var(--gold-soft);}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:40px;
+  margin-bottom:36px;
+}
+
+.footer-grid h4{
+  color:#fff;
+  font-size:15px;
+  margin-bottom:14px;
+  font-family:'Plus Jakarta Sans', sans-serif;
+  font-weight:700;
+}
+
+.footer-brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.footer-brand .name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:18px;
+  color:#fff;
+}
+
+.footer-grid p,
+.footer-grid a{
+  color:#c7dcce;
+  font-size:13.5px;
+  line-height:1.9;
+}
+
+.footer-grid a:hover{
+  color:var(--gold-soft);
+}
+
 .footer-bottom{
-  border-top:1px solid rgba(255,255,255,0.14); padding-top:20px;
-  text-align:center; font-size:12.5px; color:#a9c4b7;
+  border-top:1px solid rgba(255,255,255,0.14);
+  padding-top:20px;
+  text-align:center;
+  font-size:12.5px;
+  color:#a9c4b7;
 }
 
 @media (max-width:860px){
-  .footer-grid{grid-template-columns:1fr; gap:26px;}
-  .navlinks{
-    position:fixed; top:72px; left:0; right:0; background:#fff;
-    border-bottom:1px solid var(--line); flex-direction:column; padding:18px 24px; gap:16px; display:none;
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:26px;
   }
-  .navlinks.open{display:flex;}
-  .menu-toggle{display:block;}
-  .pagehero h1{font-size:30px;}
-   section [style*="grid-template-columns:repeat(2"],
-section [style*="grid-template-columns:repeat(3"],
-section [style*="grid-template-columns:repeat(4"]{
-  grid-template-columns:1fr !important;
-   }
+
+  .navlinks{
+    position:fixed;
+    top:72px;
+    left:0;
+    right:0;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    flex-direction:column;
+    padding:18px 24px;
+    gap:16px;
+    display:none;
+  }
+
+  .navlinks.open{
+    display:flex;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .pagehero h1{
+    font-size:30px;
+  }
+
+  section [style*="grid-template-columns:repeat(2"],
+  section [style*="grid-template-columns:repeat(3"],
+  section [style*="grid-template-columns:repeat(4"]{
+    grid-template-columns:1fr !important;
+  }
 }
+
 @media (prefers-reduced-motion: reduce){
-  *{animation:none !important; transition:none !important;}
+
+  *{
+    animation:none !important;
+    transition:none !important;
+  }
 }
 
 </style>
 </head>
+
 <body>
 
 <nav>
   <div class="navinner">
+
     <a class="brand" href="index.html">
+
       <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <circle cx="24" cy="24" r="23" fill="#fbfaf5" stroke="#bf9433" stroke-width="1.5"/>
         <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#2f6b4f"/>
         <path d="M24 26v12" stroke="#2f6b4f" stroke-width="1.6" stroke-linecap="round"/>
         <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
       </svg>
+
       <span class="brand-text">
         <span class="name" style="display:block;">Semparuk</span>
         <span class="loc">Kec. Semparuk · Kab. Sambas</span>
       </span>
+
     </a>
+
     <div class="navlinks" id="navlinks">
       <a href="index.html">Beranda</a>
       <a href="tentang.html">Profil Desa</a>
@@ -191,157 +447,254 @@ section [style*="grid-template-columns:repeat(4"]{
       <a href="galeri.html">Galeri</a>
       <a href="kontak.html">Kontak</a>
     </div>
+
     <button class="menu-toggle" id="menuToggle">☰</button>
+
   </div>
 </nav>
+
 <div class="motif"></div>
+
 
 <section class="pagehero">
   <div class="container">
     <span class="eyebrow reveal in">Potensi Desa</span>
     <h1 class="reveal in">Kekayaan Semparuk</h1>
-    <p class="reveal in">Sumber daya alam, ekonomi, dan budaya yang menjadi tulang punggung kehidupan warga.</p>
+    <p class="reveal in">
+      Sumber daya alam, ekonomi, dan budaya yang menjadi tulang punggung kehidupan warga.
+    </p>
   </div>
 </section>
+
 
 <!-- PERTANIAN -->
 <section>
   <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;">
+
     <div class="card reveal" style="overflow:hidden; aspect-ratio:4/3; order:2;">
       <img src="foto-sawah.jpg" alt="Sawah padi di Semparuk" style="width:100%; height:100%; object-fit:cover;">
     </div>
+
     <div class="reveal" style="order:1;">
       <span class="section-head tag">Pertanian</span>
       <h2 style="font-size:26px; margin-bottom:14px;">Padi Sawah</h2>
-      <p style="color:var(--muted); margin-bottom:14px;">Sebagian besar lahan di Semparuk merupakan dataran rendah yang subur dan dimanfaatkan untuk pertanian. Padi sawah menjadi salah satu tanaman utama yang diusahakan oleh masyarakat sebagai sumber penghidupan dan kebutuhan pangan.</p>
-      <p style="color:var(--muted);">Lahan persawahan yang luas serta kondisi tanah yang mendukung menjadikan pertanian padi sebagai salah satu potensi unggulan di Desa Semparuk.</p>
+
+      <p style="color:var(--muted); margin-bottom:14px;">
+        Sebagian besar lahan di Semparuk merupakan dataran rendah yang subur dan dimanfaatkan untuk pertanian.
+        Padi sawah menjadi salah satu tanaman utama yang diusahakan oleh masyarakat sebagai sumber penghidupan dan kebutuhan pangan.
+      </p>
+
+      <p style="color:var(--muted);">
+        Lahan persawahan yang luas serta kondisi tanah yang mendukung menjadikan pertanian padi sebagai salah satu potensi unggulan di Desa Semparuk.
+      </p>
     </div>
+
   </div>
 </section>
+
 
 <!-- PERKEBUNAN -->
 <section style="background:var(--cream);">
   <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;">
+
     <div class="reveal">
       <span class="section-head tag">Perkebunan</span>
       <h2 style="font-size:26px; margin-bottom:14px;">Hasil Kebun</h2>
-      <p style="color:var(--muted); margin-bottom:14px;">Selain sawah, warga Semparuk juga mengelola perkebunan kelapa yang menjadi salah satu sumber penghasilan masyarakat. Kelapa telah dibudidayakan secara turun-temurun dan dimanfaatkan untuk berbagai kebutuhan sehari-hari maupun sebagai hasil perkebunan.</p>
-      <p style="color:var(--muted);">Selain kelapa, masyarakat juga menanam berbagai tanaman perkebunan lainnya sesuai dengan kondisi lahan dan kebutuhan warga. Kondisi tanah yang subur mendukung perkembangan perkebunan di wilayah Semparuk.</p>
+
+      <p style="color:var(--muted); margin-bottom:14px;">
+        Selain sawah, warga Semparuk juga mengelola perkebunan kelapa yang menjadi salah satu sumber penghasilan masyarakat.
+        Kelapa telah dibudidayakan secara turun-temurun dan dimanfaatkan untuk berbagai kebutuhan sehari-hari maupun sebagai hasil perkebunan.
+      </p>
+
+      <p style="color:var(--muted);">
+        Selain kelapa, masyarakat juga menanam berbagai tanaman perkebunan lainnya sesuai dengan kondisi lahan dan kebutuhan warga.
+        Kondisi tanah yang subur mendukung perkembangan perkebunan di wilayah Semparuk.
+      </p>
     </div>
+
     <div class="card reveal" style="overflow:hidden; aspect-ratio:4/3;">
       <img src="foto-kebun.jpg" alt="Perkebunan warga Semparuk" style="width:100%; height:100%; object-fit:cover;">
     </div>
+
   </div>
 </section>
+
 
 <!-- BUDAYA & PARIWISATA -->
 <section style="background:var(--cream);">
   <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;">
+
     <div class="card reveal" style="overflow:hidden; aspect-ratio:4/3; order:2;">
       <img src="foto-budaya.jpg" alt="Kegiatan budaya warga Semparuk" style="width:100%; height:100%; object-fit:cover;">
     </div>
+
     <div class="reveal" style="order:1;">
       <span class="section-head tag">Budaya</span>
       <h2 style="font-size:26px; margin-bottom:14px;">Tradisi & Kearifan Lokal</h2>
-      <p style="color:var(--muted); margin-bottom:14px;">Sebagai bagian dari masyarakat Melayu Sambas, warga Semparuk masih menjaga tradisi dan kebersamaan dalam kehidupan sehari-hari. Salah satu tradisi yang masih dilakukan adalah makan saprahan dalam acara pernikahan, di mana masyarakat berkumpul dan makan bersama sebagai bentuk kebersamaan serta mempererat hubungan antarwarga.</p>
-      <p style="color:var(--muted);">Tradisi ini menjadi bagian penting dalam acara pernikahan masyarakat Semparuk dan terus dijaga secara turun-temurun.</p>
+
+      <p style="color:var(--muted); margin-bottom:14px;">
+        Sebagai bagian dari masyarakat Melayu Sambas, warga Semparuk masih menjaga tradisi dan kebersamaan dalam kehidupan sehari-hari.
+        Salah satu tradisi yang masih dilakukan adalah makan saprahan dalam acara pernikahan, di mana masyarakat berkumpul dan makan bersama sebagai bentuk kebersamaan serta mempererat hubungan antarwarga.
+      </p>
+
+      <p style="color:var(--muted);">
+        Tradisi ini menjadi bagian penting dalam acara pernikahan masyarakat Semparuk dan terus dijaga secara turun-temurun.
+      </p>
     </div>
+
   </div>
 </section>
 
-   <div class="motif"></div>
+
+<div class="motif"></div>
+
 
 <!-- INFRASTRUKTUR -->
 <section>
   <div class="container">
+
     <div class="section-head center reveal">
       <span class="tag">Sarana</span>
       <h2>Sarana di Semparuk</h2>
-      <p style="margin-left:auto; margin-right:auto;">Sebagai ibu kota kecamatan, Semparuk jadi pusat berbagai fasilitas yang juga melayani desa-desa sekitarnya.</p>
+      <p style="margin-left:auto; margin-right:auto;">
+        Sebagai ibu kota kecamatan, Semparuk jadi pusat berbagai fasilitas yang juga melayani desa-desa sekitarnya.
+      </p>
     </div>
+
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;">
+
       <div class="card pad reveal" style="text-align:center;">
         <h4 style="font-size:15px; margin-bottom:6px;">Pendidikan</h4>
-        <p style="color:var(--muted); font-size:13px;">Tersedia sekolah TK sampai SD/MI, SMP/MTs, SMA/SMK yang dikelola oleh tenaga pendidik setempat.</p>
+        <p style="color:var(--muted); font-size:13px;">
+          Tersedia sekolah TK sampai SD/MI, SMP/MTs, SMA/SMK yang dikelola oleh tenaga pendidik setempat.
+        </p>
       </div>
+
       <div class="card pad reveal" style="text-align:center;">
         <h4 style="font-size:15px; margin-bottom:6px;">Kesehatan</h4>
-        <p style="color:var(--muted); font-size:13px;">Puskesmas Semparuk di Jl. Tunas Baru, melayani warga sekecamatan</p>
+        <p style="color:var(--muted); font-size:13px;">
+          Puskesmas Semparuk di Jl. Tunas Baru, melayani warga sekecamatan
+        </p>
       </div>
+
     </div>
+
   </div>
 </section>
-   <div class="motif"></div>
-   <!-- FASILITAS & PELAYANAN -->
+
+
+<div class="motif"></div>
+
+
+<!-- FASILITAS & PELAYANAN -->
 <section>
   <div class="container">
+
     <div class="section-head center reveal">
       <span class="tag">Pelayanan Publik</span>
       <h2>Fasilitas & Pelayanan</h2>
     </div>
+
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+
       <div class="card pad reveal">
         <div style="font-size:34px; margin-bottom:10px;">🏛️</div>
         <h3 style="font-size:16px; margin-bottom:8px;">Kantor Kecamatan Semparuk</h3>
-        <p style="color:var(--muted); font-size:14px;">Pusat pelayanan administrasi dan pemerintahan di tingkat kecamatan.</p>
+        <p style="color:var(--muted); font-size:14px;">
+          Pusat pelayanan administrasi dan pemerintahan di tingkat kecamatan.
+        </p>
       </div>
+
       <div class="card pad reveal">
         <div style="font-size:34px; margin-bottom:10px;">🏠</div>
         <h3 style="font-size:16px; margin-bottom:8px;">Kantor Desa</h3>
-        <p style="color:var(--muted); font-size:14px;">Tempat pelayanan administrasi dan kebutuhan masyarakat di tingkat desa.</p>
+        <p style="color:var(--muted); font-size:14px;">
+          Tempat pelayanan administrasi dan kebutuhan masyarakat di tingkat desa.
+        </p>
       </div>
+
       <div class="card pad reveal">
         <div style="font-size:34px; margin-bottom:10px;">🕌</div>
         <h3 style="font-size:16px; margin-bottom:8px;">Sarana Ibadah</h3>
-        <p style="color:var(--muted); font-size:14px;">Berbagai masjid dan tempat ibadah yang tersebar di lingkungan masyarakat Semparuk.</p>
+        <p style="color:var(--muted); font-size:14px;">
+          Berbagai masjid dan tempat ibadah yang tersebar di lingkungan masyarakat Semparuk.
+        </p>
       </div>
+
     </div>
+
   </div>
 </section>
 
+
 <div class="motif"></div>
+
 
 <!-- EKONOMI & PERDAGANGAN -->
 <section style="background:var(--cream);">
   <div class="container">
+
     <div class="section-head center reveal">
       <span class="tag">Perekonomian</span>
       <h2>Ekonomi & Perdagangan</h2>
     </div>
+
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;">
+
       <div class="card pad reveal">
         <div style="font-size:34px; margin-bottom:10px;">🛒</div>
         <h3 style="font-size:16px; margin-bottom:8px;">Pasar Tradisional</h3>
-        <p style="color:var(--muted); font-size:14px;">Menjadi pusat jual beli berbagai kebutuhan pokok dan kebutuhan sehari-hari masyarakat.</p>
+        <p style="color:var(--muted); font-size:14px;">
+          Menjadi pusat jual beli berbagai kebutuhan pokok dan kebutuhan sehari-hari masyarakat.
+        </p>
       </div>
+
       <div class="card pad reveal">
         <div style="font-size:34px; margin-bottom:10px;">🏪</div>
         <h3 style="font-size:16px; margin-bottom:8px;">Toko & Warung</h3>
-        <p style="color:var(--muted); font-size:14px;">Berbagai toko, warung, dan usaha kecil masyarakat yang mendukung aktivitas ekonomi lokal.</p>
+        <p style="color:var(--muted); font-size:14px;">
+          Berbagai toko, warung, dan usaha kecil masyarakat yang mendukung aktivitas ekonomi lokal.
+        </p>
       </div>
+
     </div>
+
   </div>
 </section>
 
+
 <div class="motif"></div>
+
 
 <footer>
   <div class="container">
+
     <div class="footer-grid">
+
       <div>
         <div class="footer-brand">
+
           <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <circle cx="24" cy="24" r="23" fill="#1c4432" stroke="#bf9433" stroke-width="1.5"/>
             <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#f3e4b8"/>
             <path d="M24 26v12" stroke="#f3e4b8" stroke-width="1.6" stroke-linecap="round"/>
             <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
           </svg>
+
           <span class="name">Semparuk</span>
+
         </div>
-        <p>Kecamatan Semparuk, Kabupaten Sambas,<br>Provinsi Kalimantan Barat, Indonesia.</p>
+
+        <p>
+          Kecamatan Semparuk, Kabupaten Sambas,<br>
+          Provinsi Kalimantan Barat, Indonesia.
+        </p>
       </div>
+
+
       <div>
         <h4>Jelajahi</h4>
+
         <p>
           <a href="index.html">Beranda</a><br>
           <a href="tentang.html">Profil Desa</a><br>
@@ -350,30 +703,79 @@ section [style*="grid-template-columns:repeat(4"]{
           <a href="kontak.html">Kontak</a>
         </p>
       </div>
+
+
       <div>
         <h4>Kontak</h4>
-        <p>Kantor Desa Semparuk<br>53RR+33H, Semparuk<br>Kec. Semparuk, Kab. Sambas 79461</p>
+
+        <p>
+          Kantor Desa Semparuk<br>
+          53RR+33H, Semparuk<br>
+          Kec. Semparuk, Kab. Sambas 79461
+        </p>
       </div>
+
     </div>
-    <div class="footer-bottom">© 2026 Semparuk. Seluruh hak dilindungi.</div>
+
+
+    <!-- JUMLAH PENGUNJUNG -->
+    <div class="footer-bottom">
+      © 2026 Semparuk. Seluruh hak dilindungi. ·
+      Pengunjung: <span id="jmlPengunjung">...</span>
+    </div>
+
   </div>
 </footer>
 
+
 <script>
+
 // Reveal saat discroll
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('in');
+  });
 }, { threshold: 0.15 });
+
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
 
 // Toggle menu mobile
 const menuToggle = document.getElementById('menuToggle');
 const navLinksEl = document.getElementById('navlinks');
+
 if (menuToggle && navLinksEl) {
-  menuToggle.addEventListener('click', () => navLinksEl.classList.toggle('open'));
-  navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinksEl.classList.remove('open')));
+
+  menuToggle.addEventListener('click', () => {
+    navLinksEl.classList.toggle('open');
+  });
+
+  navLinksEl.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () =>
+      navLinksEl.classList.remove('open')
+    )
+  );
+
 }
 
+
+// JUMLAH PENGUNJUNG
+fetch("https://script.google.com/macros/s/AKfycbymL6I6mK7WWk9nxc1uN9f3k_5hx8plebhbkZqCCwfNp-OFpqomRaqa36rx9VjuBzRnkQ/exec?action=hitung")
+  .then(res => res.json())
+  .then(data => {
+
+    const el = document.getElementById('jmlPengunjung');
+
+    if (el && data.total !== undefined) {
+      el.textContent = data.total;
+    }
+
+  })
+  .catch(err =>
+    console.error("Gagal ambil data pengunjung:", err)
+  );
+
 </script>
+
 </body>
 </html>
