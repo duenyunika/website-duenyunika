@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Pengaduan — Semparuk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--white:#fff;--cream:#fbfaf5;--ink:#20301f;--muted:#647461;--green:#2f6b4f;--green-deep:#1c4432;--green-soft:#dfeee5;--gold:#bf9433;--line:rgba(47,107,79,.14);--shadow:0 20px 50px rgba(28,68,50,.10);}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 8%,rgba(47,107,79,.07),transparent 40%),var(--white);min-height:100vh;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.container{max-width:1180px;margin:auto;padding:0 22px}
+nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.navinner{max-width:1180px;margin:auto;padding:15px 22px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:'Fraunces',serif;font-size:21px;color:var(--green-deep);font-weight:700}
+.navright{display:flex;gap:10px;align-items:center}
+.btn{padding:11px 18px;border-radius:999px;border:0;font-family:inherit;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--green-deep);color:#fff}
+.btn-outline{background:#fff;color:var(--green-deep);border:1px solid var(--green)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.hero{padding:48px 0 25px}
+.hero h1{font-family:'Fraunces',serif;font-size:36px}
+.hero p{color:var(--muted);margin-top:8px}
+.card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:24px}
+.login-wrap{max-width:430px;margin:55px auto}
+.form{display:grid;gap:13px}
+label{font-size:13px;font-weight:700}
+input,textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;font:inherit;background:#fff}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--green)}
+textarea{resize:vertical}
+.msg{min-height:20px;font-size:13px;margin-top:5px}
+.err{color:#a33} .ok{color:var(--green-deep)}
+.hidden{display:none!important}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:20px}
+.stat{padding:18px;border:1px solid var(--line);border-radius:15px;background:var(--cream)}
+.stat b{display:block;font-size:26px;color:var(--green-deep)}
+.stat span{font-size:12px;color:var(--muted)}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:900px}
+th,td{padding:13px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+th{color:var(--green-deep);background:var(--green-soft);font-size:12px}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;background:var(--gold);color:#fff}
+.badge.done{background:var(--green)}
+.token{font-family:monospace;font-weight:700;letter-spacing:.03em}
+.modal{position:fixed;inset:0;background:rgba(15,30,20,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal-card{background:#fff;border-radius:20px;padding:24px;max-width:600px;width:100%;box-shadow:0 30px 70px rgba(0,0,0,.2)}
+.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px}
+.close{border:0;background:none;font-size:24px;cursor:pointer}
+@media(max-width:700px){.stats{grid-template-columns:1fr}.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="navinner">
+    <a class="brand" href="index.html">Semparuk · Admin</a>
+    <div class="navright">
+      <a class="btn btn-outline" href="kontak.html">← Kembali</a>
+      <button class="btn btn-primary hidden" id="logoutBtn">Keluar</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <section id="loginSection" class="login-wrap">
+    <div class="card">
+      <h1 style="font-family:'Fraunces',serif;font-size:30px;">🔐 Login Admin</h1>
+      <p style="color:var(--muted);font-size:14px;margin:8px 0 20px;">Masuk untuk melihat dan menanggapi pengaduan masyarakat.</p>
+      <form class="form" id="loginForm">
+        <div><label>Username</label><input id="username" required autocomplete="username"></div>
+        <div><label>Password</label><input id="password" type="password" required autocomplete="current-password"></div>
+        <button class="btn btn-primary" id="loginBtn">Login</button>
+        <div class="msg" id="loginMsg"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <div class="hero">
+      <h1>📋 Kelola Pengaduan</h1>
+      <p>Lihat pengaduan yang masuk dan kirim tanggapan kepada pengadu.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="totalCount">0</b><span>Total Pengaduan</span></div>
+      <div class="stat"><b id="pendingCount">0</b><span>Belum Ditanggapi</span></div>
+      <div class="stat"><b id="doneCount">0</b><span>Sudah Ditanggapi</span></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px;">
+        <h2 style="font-family:'Fraunces',serif;font-size:23px;">Daftar Pengaduan</h2>
+        <button class="btn btn-outline" id="refreshBtn">↻ Refresh</button>
+      </div>
+      <div id="adminMsg" class="msg"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Token</th><th>Waktu</th><th>Nama</th><th>Pengaduan</th><th>Status</th><th>Tanggapan</th><th>Aksi</th></tr></thead>
+          <tbody id="aduanTable"><tr><td colspan="7">Memuat...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal hidden" id="replyModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 style="font-family:'Fraunces',serif;">💬 Tanggapi Pengaduan</h2>
+      <button class="close" id="closeModal">×</button>
+    </div>
+    <div id="replyInfo" style="background:var(--cream);padding:14px;border-radius:12px;margin-bottom:15px;font-size:13px;"></div>
+    <form class="form" id="replyForm">
+      <textarea id="replyText" rows="7" maxlength="1500" placeholder="Tulis tanggapan admin..." required></textarea>
+      <button class="btn btn-primary" id="replyBtn">Kirim Tanggapan</button>
+      <div class="msg" id="replyMsg"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbymL6I6mK7WWk9nxc1uN9f3k_5hx8plebhbkZqCCwfNp-OFpqomRaqa36rx9VjuBzRnkQ/exec";
+let sessionToken = localStorage.getItem('semparukAdminSession') || '';
+let currentToken = '';
+
+const loginSection = document.getElementById('loginSection');
+const dashboard = document.getElementById('dashboard');
+const logoutBtn = document.getElementById('logoutBtn');
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s ?? '';
+  return d.innerHTML;
+}
+
+function showDashboard() {
+  loginSection.classList.add('hidden');
+  dashboard.classList.remove('hidden');
+  logoutBtn.classList.remove('hidden');
+  loadComplaints();
+}
+
+function showLogin() {
+  loginSection.classList.remove('hidden');
+  dashboard.classList.add('hidden');
+  logoutBtn.classList.add('hidden');
+}
+
+async function postForm(params) {
+  const body = new URLSearchParams(params);
+  const res = await fetch(API_URL, {method:'POST', body});
+  return await res.json();
+}
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  const msg = document.getElementById('loginMsg');
+  btn.disabled = true; btn.textContent = 'Memeriksa...'; msg.textContent = '';
+  try {
+    const data = await postForm({
+      action:'loginAdmin',
+      username:document.getElementById('username').value.trim(),
+      password:document.getElementById('password').value
+    });
+    if (!data.success) throw new Error(data.message || 'Login gagal.');
+    sessionToken = data.sessionToken;
+    localStorage.setItem('semparukAdminSession', sessionToken);
+    showDashboard();
+  } catch(err) {
+    msg.textContent = err.message;
+    msg.className = 'msg err';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Login';
+  }
+});
+
+async function loadComplaints() {
+  const tbody = document.getElementById('aduanTable');
+  const msg = document.getElementById('adminMsg');
+  tbody.innerHTML = '<tr><td colspan="7">Memuat...</td></tr>';
+  try {
+    const res = await fetch(API_URL + '?action=adminList&session=' + encodeURIComponent(sessionToken));
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Sesi tidak valid.');
+    const rows = data.data || [];
+    document.getElementById('totalCount').textContent = rows.length;
+    document.getElementById('pendingCount').textContent = rows.filter(x => x.status !== 'Sudah Ditanggapi').length;
+    document.getElementById('doneCount').textContent = rows.filter(x => x.status === 'Sudah Ditanggapi').length;
+
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="7">Belum ada pengaduan.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = rows.map(x => `
+      <tr>
+        <td><span class="token">${esc(x.token)}</span></td>
+        <td>${esc(x.timestamp)}</td>
+        <td>${esc(x.nama)}</td>
+        <td>${esc(x.pengaduan)}</td>
+        <td><span class="badge ${x.status === 'Sudah Ditanggapi' ? 'done' : ''}">${esc(x.status)}</span></td>
+        <td>${x.tanggapan ? esc(x.tanggapan) : '<span style="color:var(--muted)">Belum ada</span>'}</td>
+        <td><button class="btn btn-outline reply-action" data-token="${esc(x.token)}" data-pengaduan="${esc(x.pengaduan)}" data-tanggapan="${esc(x.tanggapan || '')}">Tanggapi</button></td>
+      </tr>
+    `).join('');
+
+    tbody.querySelectorAll('.reply-action').forEach(btn => {
+      btn.addEventListener('click', () => openReply(btn.dataset.token, btn.dataset.pengaduan, btn.dataset.tanggapan));
+    });
+  } catch(err) {
+    msg.textContent = err.message;
+    msg.className = 'msg err';
+    if (err.message.toLowerCase().includes('sesi')) {
+      sessionToken = ''; localStorage.removeItem('semparukAdminSession'); showLogin();
+    }
+  }
+}
+
+function openReply(token, pengaduan, oldReply) {
+  currentToken = token;
+  document.getElementById('replyInfo').innerHTML = '<b>Token:</b> ' + esc(token) + '<br><br><b>Pengaduan:</b><br>' + esc(pengaduan);
+  document.getElementById('replyText').value = oldReply || '';
+  document.getElementById('replyMsg').textContent = '';
+  document.getElementById('replyModal').classList.remove('hidden');
+}
+
+function closeReply() {
+  document.getElementById('replyModal').classList.add('hidden');
+}
+document.getElementById('closeModal').addEventListener('click', closeReply);
+document.getElementById('replyModal').addEventListener('click', e => { if(e.target.id === 'replyModal') closeReply(); });
+
+document.getElementById('replyForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('replyBtn');
+  const msg = document.getElementById('replyMsg');
+  btn.disabled = true; btn.textContent = 'Menyimpan...'; msg.textContent = '';
+  try {
+    const data = await postForm({
+      action:'tanggapiPengaduan',
+      session:sessionToken,
+      token:currentToken,
+      tanggapan:document.getElementById('replyText').value.trim()
+    });
+    if (!data.success) throw new Error(data.message || 'Gagal menyimpan tanggapan.');
+    msg.textContent = 'Tanggapan berhasil disimpan.';
+    msg.className = 'msg ok';
+    setTimeout(() => { closeReply(); loadComplaints(); }, 600);
+  } catch(err) {
+    msg.textContent = err.message;
+    msg.className = 'msg err';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Kirim Tanggapan';
+  }
+});
+
+document.getElementById('refreshBtn').addEventListener('click', loadComplaints);
+
+logoutBtn.addEventListener('click', async () => {
+  try { await postForm({action:'logoutAdmin', session:sessionToken}); } catch(e) {}
+  sessionToken = '';
+  localStorage.removeItem('semparukAdminSession');
+  showLogin();
+});
+
+if (sessionToken) showDashboard();
+else showLogin();
+</script>
+</body>
+</html>
