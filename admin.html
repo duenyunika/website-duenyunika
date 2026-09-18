@@ -5,56 +5,227 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Pengaduan — Semparuk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--white:#fff;--cream:#fbfaf5;--ink:#20301f;--muted:#647461;--green:#2f6b4f;--green-deep:#1c4432;--green-soft:#dfeee5;--gold:#bf9433;--line:rgba(47,107,79,.14);--shadow:0 20px 50px rgba(28,68,50,.10);}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 8%,rgba(47,107,79,.07),transparent 40%),var(--white);min-height:100vh;line-height:1.6}
-a{color:inherit;text-decoration:none}
-.container{max-width:1180px;margin:auto;padding:0 22px}
-nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.navinner{max-width:1180px;margin:auto;padding:15px 22px;display:flex;justify-content:space-between;align-items:center}
-.brand{font-family:'Fraunces',serif;font-size:21px;color:var(--green-deep);font-weight:700}
-.navright{display:flex;gap:10px;align-items:center}
-.btn{padding:11px 18px;border-radius:999px;border:0;font-family:inherit;font-weight:700;cursor:pointer}
-.btn-primary{background:var(--green-deep);color:#fff}
-.btn-outline{background:#fff;color:var(--green-deep);border:1px solid var(--green)}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.hero{padding:48px 0 25px}
-.hero h1{font-family:'Fraunces',serif;font-size:36px}
-.hero p{color:var(--muted);margin-top:8px}
-.card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:24px}
-.login-wrap{max-width:430px;margin:55px auto}
-.form{display:grid;gap:13px}
-label{font-size:13px;font-weight:700}
-input,textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;font:inherit;background:#fff}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--green)}
-textarea{resize:vertical}
-.msg{min-height:20px;font-size:13px;margin-top:5px}
-.err{color:#a33} .ok{color:var(--green-deep)}
-.hidden{display:none!important}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:20px}
-.stat{padding:18px;border:1px solid var(--line);border-radius:15px;background:var(--cream)}
-.stat b{display:block;font-size:26px;color:var(--green-deep)}
-.stat span{font-size:12px;color:var(--muted)}
-.table-wrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:900px}
-th,td{padding:13px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
-th{color:var(--green-deep);background:var(--green-soft);font-size:12px}
-.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;background:var(--gold);color:#fff}
-.badge.done{background:var(--green)}
-.token{font-family:monospace;font-weight:700;letter-spacing:.03em}
-.modal{position:fixed;inset:0;background:rgba(15,30,20,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
-.modal-card{background:#fff;border-radius:20px;padding:24px;max-width:600px;width:100%;box-shadow:0 30px 70px rgba(0,0,0,.2)}
-.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px}
-.close{border:0;background:none;font-size:24px;cursor:pointer}
-@media(max-width:700px){.stats{grid-template-columns:1fr}.hero h1{font-size:30px}}
+/* ============================================
+   DESA SEMPARUK — Admin Pengaduan
+   Palet: putih bersih + hijau padi + emas panen
+   (disamakan dengan kontak.html)
+   ============================================ */
+
+:root{
+  --white: #ffffff;
+  --cream: #fbfaf5;
+  --ink: #20301f;
+  --muted: #647461;
+  --green: #2f6b4f;
+  --green-deep: #1c4432;
+  --green-soft: #dfeee5;
+  --gold: #bf9433;
+  --gold-soft: #f3e4b8;
+  --line: rgba(47,107,79,0.14);
+  --glass: rgba(255,255,255,0.78);
+  --shadow: 0 20px 50px rgba(28,68,50,0.10);
+  --radius: 20px;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Plus Jakarta Sans', sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(47,107,79,0.07), transparent 40%),
+    radial-gradient(circle at 95% 18%, rgba(191,148,51,0.08), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(47,107,79,0.05), transparent 50%),
+    var(--white);
+  background-attachment:fixed;
+  line-height:1.65;
+  overflow-x:hidden;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+h1,h2,h3,h4{font-family:'Fraunces', serif; letter-spacing:-0.01em; color:var(--ink); font-weight:600;}
+a{color:inherit; text-decoration:none;}
+.container{max-width:1180px; margin:0 auto; padding:0 24px;}
+::selection{background:var(--gold-soft); color:var(--green-deep);}
+
+/* ===== Motif pembatas (songket zig-zag) ===== */
+.motif{
+  height:14px;
+  width:100%;
+  background-image: linear-gradient(135deg, var(--gold) 25%, transparent 25%),
+                     linear-gradient(225deg, var(--gold) 25%, transparent 25%),
+                     linear-gradient(45deg, var(--green) 25%, transparent 25%),
+                     linear-gradient(315deg, var(--green) 25%, transparent 25%);
+  background-position: 0 0, 7px 0, 0 0, 7px 0;
+  background-size: 14px 14px;
+  background-repeat: repeat-x;
+  opacity:0.55;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.navinner{
+  display:flex; align-items:center; justify-content:space-between;
+  max-width:1180px; margin:0 auto; padding:16px 24px;
+}
+.brand{display:flex; align-items:center; gap:12px;}
+.emblem{width:40px; height:40px; flex-shrink:0;}
+.brand-text{line-height:1.2;}
+.brand-text .name{font-family:'Fraunces', serif; font-weight:600; font-size:16.5px; color:var(--green-deep);}
+.brand-text .loc{font-size:11px; color:var(--muted); letter-spacing:0.03em;}
+.navright{display:flex; gap:12px; align-items:center;}
+
+/* ===== Page hero ===== */
+.pagehero{
+  padding:56px 0 40px; text-align:center;
+  border-bottom:1px solid var(--line);
+}
+.pagehero .eyebrow{
+  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
+}
+.pagehero h1{font-size:34px;}
+.pagehero p{color:var(--muted); max-width:520px; margin:14px auto 0; font-size:15.5px;}
+
+section{position:relative; z-index:1; padding:50px 0;}
+
+/* ===== Cards ===== */
+.card{
+  background:var(--glass); backdrop-filter:blur(10px);
+  border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.card.pad{padding:30px;}
+
+/* ===== Buttons ===== */
+.btn{
+  padding:13px 22px; border-radius:100px; font-weight:600; font-size:14.5px;
+  cursor:pointer; transition:transform .2s, box-shadow .2s; display:inline-block;
+  border:none; font-family:inherit;
+}
+.btn-primary{background:linear-gradient(90deg, var(--green-deep), var(--green)); color:#fff; box-shadow:0 10px 24px rgba(47,107,79,0.3);}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(47,107,79,0.4);}
+.btn-primary:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
+.btn-outline{background:var(--white); border:1.5px solid var(--green); color:var(--green-deep);}
+.btn-outline:hover{transform:translateY(-2px); background:var(--green-soft);}
+.btn:disabled{opacity:.55; cursor:not-allowed; transform:none;}
+
+/* ===== Login ===== */
+.login-wrap{max-width:440px; margin:40px auto;}
+.login-wrap .eyebrow{
+  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
+  color:var(--gold); text-transform:uppercase; margin-bottom:8px;
+}
+.login-wrap h1{font-size:28px; margin-bottom:6px;}
+.login-wrap p{color:var(--muted); font-size:14px; margin-bottom:22px;}
+
+.form{display:grid; gap:14px;}
+.form label{font-size:13px; font-weight:700; color:var(--green-deep); margin-bottom:2px; display:block;}
+.form input,
+.form textarea,
+.form select{
+  width:100%; padding:13px 16px; border-radius:12px;
+  border:1.5px solid var(--line); font-family:inherit; font-size:14.5px;
+  background:var(--white); color:var(--ink); resize:vertical;
+}
+.form input:focus,
+.form textarea:focus,
+.form select:focus{outline:none; border-color:var(--green);}
+.msg{font-size:13.5px; margin-top:2px; min-height:20px;}
+.msg.ok{color:var(--green-deep);}
+.msg.err{color:#a33;}
+.hidden{display:none !important;}
+
+/* ===== Stats ===== */
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px;}
+.stat{
+  padding:20px; border:1px solid var(--line); border-radius:16px;
+  background:var(--cream); text-align:left;
+}
+.stat b{display:block; font-family:'Fraunces', serif; font-size:28px; color:var(--green-deep); font-weight:600;}
+.stat span{font-size:12.5px; color:var(--muted);}
+
+/* ===== Table ===== */
+.table-wrap{overflow:auto;}
+table{width:100%; border-collapse:collapse; min-width:900px;}
+th,td{padding:14px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; font-size:13.5px;}
+th{color:var(--green-deep); background:var(--green-soft); font-size:12px; font-weight:700; letter-spacing:0.02em;}
+tbody tr:hover{background:rgba(47,107,79,0.04);}
+.badge{
+  display:inline-block; padding:5px 11px; border-radius:999px; font-size:11px;
+  font-weight:700; background:var(--gold); color:#fff; letter-spacing:0.02em;
+}
+.badge.done{background:var(--green);}
+.token{font-family:monospace; font-weight:700; letter-spacing:.03em; color:var(--green-deep);}
+
+/* ===== Modal ===== */
+.modal{
+  position:fixed; inset:0; background:rgba(28,68,50,0.45);
+  display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;
+  backdrop-filter:blur(3px);
+}
+.modal-card{
+  background:var(--white); border-radius:var(--radius); padding:26px;
+  max-width:600px; width:100%; box-shadow:0 30px 70px rgba(28,68,50,0.25);
+  border:1px solid var(--line);
+}
+.modal-head{display:flex; justify-content:space-between; gap:15px; align-items:center; margin-bottom:16px;}
+.modal-head h2{font-size:22px;}
+.close{border:none; background:none; font-size:26px; cursor:pointer; color:var(--muted); line-height:1;}
+.close:hover{color:var(--green-deep);}
+.reply-info{
+  background:var(--cream); border:1px solid var(--line); padding:15px;
+  border-radius:14px; margin-bottom:16px; font-size:13.5px; color:var(--muted);
+}
+.reply-info b{color:var(--green-deep);}
+
+/* ===== Reveal ===== */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+.reveal.in{opacity:1; transform:none;}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--green-deep); color:#e8f0ea; padding:36px 0 22px; position:relative; z-index:1; margin-top:auto;
+}
+.footer-bottom{
+  text-align:center; font-size:12.5px; color:#a9c4b7;
+}
+
+@media (max-width:860px){
+  .stats{grid-template-columns:1fr;}
+  .pagehero h1{font-size:28px;}
+  .navinner{flex-wrap:wrap; gap:10px;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important;}
+}
 </style>
 </head>
 <body>
+
 <nav>
   <div class="navinner">
-    <a class="brand" href="index.html">Semparuk · Admin</a>
+    <a class="brand" href="index.html">
+      <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="23" fill="#fbfaf5" stroke="#bf9433" stroke-width="1.5"/>
+        <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#2f6b4f"/>
+        <path d="M24 26v12" stroke="#2f6b4f" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">
+        <span class="name" style="display:block;">Semparuk</span>
+        <span class="loc">Panel Admin Pengaduan</span>
+      </span>
+    </a>
     <div class="navright">
       <a class="btn btn-outline" href="kontak.html">← Kembali</a>
       <button class="btn btn-primary hidden" id="logoutBtn">Keluar</button>
@@ -62,35 +233,51 @@ th{color:var(--green-deep);background:var(--green-soft);font-size:12px}
   </div>
 </nav>
 
+<div class="motif"></div>
+
+<section class="pagehero">
+  <div class="container">
+    <span class="eyebrow reveal in">Panel Internal</span>
+    <h1 class="reveal in">🔐 Admin Pengaduan</h1>
+    <p class="reveal in">Kelola dan tanggapi pengaduan yang dikirimkan oleh masyarakat Desa Semparuk.</p>
+  </div>
+</section>
+
 <main class="container">
-  <section id="loginSection" class="login-wrap">
-    <div class="card">
-      <h1 style="font-family:'Fraunces',serif;font-size:30px;">🔐 Login Admin</h1>
-      <p style="color:var(--muted);font-size:14px;margin:8px 0 20px;">Masuk untuk melihat dan menanggapi pengaduan masyarakat.</p>
+
+  <section id="loginSection" class="login-wrap" style="padding-top:20px;">
+    <div class="card pad reveal in">
+      <span class="eyebrow">Masuk</span>
+      <h1>Login Admin</h1>
+      <p>Masuk untuk melihat dan menanggapi pengaduan masyarakat.</p>
       <form class="form" id="loginForm">
-        <div><label>Username</label><input id="username" required autocomplete="username"></div>
-        <div><label>Password</label><input id="password" type="password" required autocomplete="current-password"></div>
+        <div>
+          <label>Username</label>
+          <input id="username" required autocomplete="username">
+        </div>
+        <div>
+          <label>Password</label>
+          <input id="password" type="password" required autocomplete="current-password">
+        </div>
         <button class="btn btn-primary" id="loginBtn">Login</button>
         <div class="msg" id="loginMsg"></div>
       </form>
     </div>
   </section>
 
-  <section id="dashboard" class="hidden">
-    <div class="hero">
-      <h1>📋 Kelola Pengaduan</h1>
-      <p>Lihat pengaduan yang masuk dan kirim tanggapan kepada pengadu.</p>
-    </div>
-
-    <div class="stats">
+  <section id="dashboard" class="hidden" style="padding-top:10px;">
+    <div class="stats reveal in">
       <div class="stat"><b id="totalCount">0</b><span>Total Pengaduan</span></div>
       <div class="stat"><b id="pendingCount">0</b><span>Belum Ditanggapi</span></div>
       <div class="stat"><b id="doneCount">0</b><span>Sudah Ditanggapi</span></div>
     </div>
 
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px;">
-        <h2 style="font-family:'Fraunces',serif;font-size:23px;">Daftar Pengaduan</h2>
+    <div class="card pad reveal in">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
+        <div>
+          <span class="eyebrow" style="margin-bottom:4px; display:inline-block;">Layanan Masyarakat</span>
+          <h2 style="font-size:22px;">Daftar Pengaduan</h2>
+        </div>
         <button class="btn btn-outline" id="refreshBtn">↻ Refresh</button>
       </div>
       <div id="adminMsg" class="msg"></div>
@@ -102,15 +289,26 @@ th{color:var(--green-deep);background:var(--green-soft);font-size:12px}
       </div>
     </div>
   </section>
+
 </main>
+
+<div class="motif"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      © 2026 Semparuk. Seluruh hak dilindungi. · Panel Admin Pengaduan
+    </div>
+  </div>
+</footer>
 
 <div class="modal hidden" id="replyModal">
   <div class="modal-card">
     <div class="modal-head">
-      <h2 style="font-family:'Fraunces',serif;">💬 Tanggapi Pengaduan</h2>
+      <h2>💬 Tanggapi Pengaduan</h2>
       <button class="close" id="closeModal">×</button>
     </div>
-    <div id="replyInfo" style="background:var(--cream);padding:14px;border-radius:12px;margin-bottom:15px;font-size:13px;"></div>
+    <div id="replyInfo" class="reply-info"></div>
     <form class="form" id="replyForm">
       <textarea id="replyText" rows="7" maxlength="1500" placeholder="Tulis tanggapan admin..." required></textarea>
       <button class="btn btn-primary" id="replyBtn">Kirim Tanggapan</button>
@@ -119,6 +317,13 @@ th{color:var(--green-deep);background:var(--green-soft);font-size:12px}
   </div>
 </div>
 
+<script>
+// Reveal saat discroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzFmLgF2K6D_n80rQp0Y2t2nvku5K4hZspA6j8kJ_1GXb0V4d6MKWJJurL4PtromlNM-Q/exec";
 let sessionToken = localStorage.getItem('semparukAdminSession') || '';
@@ -157,7 +362,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('loginBtn');
   const msg = document.getElementById('loginMsg');
-  btn.disabled = true; btn.textContent = 'Memeriksa...'; msg.textContent = '';
+  btn.disabled = true; btn.textContent = 'Memeriksa...'; msg.textContent = ''; msg.className = 'msg';
   try {
     const data = await postForm({
       action:'loginAdmin',
@@ -236,7 +441,7 @@ document.getElementById('replyForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('replyBtn');
   const msg = document.getElementById('replyMsg');
-  btn.disabled = true; btn.textContent = 'Menyimpan...'; msg.textContent = '';
+  btn.disabled = true; btn.textContent = 'Menyimpan...'; msg.textContent = ''; msg.className = 'msg';
   try {
     const data = await postForm({
       action:'tanggapiPengaduan',
