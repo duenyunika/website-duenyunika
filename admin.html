@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Pengaduan — Semparuk</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 /* ============================================
-   DESA SEMPARUK — Admin Pengaduan
-   Palet: putih bersih + hijau padi + emas panen
-   (disamakan dengan kontak.html)
+   DESA SEMPARUK — ADMIN PENGADUAN
+   RESPONSIVE DESKTOP + MOBILE
    ============================================ */
 
 :root{
@@ -29,449 +30,2122 @@
   --radius: 20px;
 }
 
-*{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
+/* ===== RESET ===== */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+  width:100%;
+}
+
 body{
+  width:100%;
+  min-width:0;
+  min-height:100vh;
+
   font-family:'Plus Jakarta Sans', sans-serif;
   color:var(--ink);
+
   background:
     radial-gradient(circle at 8% 8%, rgba(47,107,79,0.07), transparent 40%),
     radial-gradient(circle at 95% 18%, rgba(191,148,51,0.08), transparent 42%),
     radial-gradient(circle at 50% 100%, rgba(47,107,79,0.05), transparent 50%),
     var(--white);
+
   background-attachment:fixed;
   line-height:1.65;
   overflow-x:hidden;
-  min-height:100vh;
+
   display:flex;
   flex-direction:column;
 }
 
-h1,h2,h3,h4{font-family:'Fraunces', serif; letter-spacing:-0.01em; color:var(--ink); font-weight:600;}
-a{color:inherit; text-decoration:none;}
-.container{max-width:1180px; margin:0 auto; padding:0 24px;}
-::selection{background:var(--gold-soft); color:var(--green-deep);}
+h1,h2,h3,h4{
+  font-family:'Fraunces', serif;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+  font-weight:600;
+}
 
-/* ===== Motif pembatas (songket zig-zag) ===== */
-.motif{
-  height:14px;
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* ===== CONTAINER ===== */
+
+.container{
   width:100%;
-  background-image: linear-gradient(135deg, var(--gold) 25%, transparent 25%),
-                     linear-gradient(225deg, var(--gold) 25%, transparent 25%),
-                     linear-gradient(45deg, var(--green) 25%, transparent 25%),
-                     linear-gradient(315deg, var(--green) 25%, transparent 25%);
-  background-position: 0 0, 7px 0, 0 0, 7px 0;
-  background-size: 14px 14px;
-  background-repeat: repeat-x;
+  max-width:1180px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-left:24px;
+  padding-right:24px;
+}
+
+::selection{
+  background:var(--gold-soft);
+  color:var(--green-deep);
+}
+
+/* ===== MOTIF ===== */
+
+.motif{
+  width:100%;
+  height:14px;
+  flex-shrink:0;
+
+  background-image:
+    linear-gradient(135deg, var(--gold) 25%, transparent 25%),
+    linear-gradient(225deg, var(--gold) 25%, transparent 25%),
+    linear-gradient(45deg, var(--green) 25%, transparent 25%),
+    linear-gradient(315deg, var(--green) 25%, transparent 25%);
+
+  background-position:
+    0 0,
+    7px 0,
+    0 0,
+    7px 0;
+
+  background-size:14px 14px;
+  background-repeat:repeat-x;
   opacity:0.55;
 }
 
-/* ===== NAV ===== */
+/* ============================================
+   NAV
+   ============================================ */
+
 nav{
-  position:sticky; top:0; z-index:50;
+  position:sticky;
+  top:0;
+  z-index:50;
+
+  width:100%;
+
   background:rgba(255,255,255,0.88);
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
   border-bottom:1px solid var(--line);
 }
+
 .navinner{
-  display:flex; align-items:center; justify-content:space-between;
-  max-width:1180px; margin:0 auto; padding:16px 24px;
-}
-.brand{display:flex; align-items:center; gap:12px;}
-.emblem{width:40px; height:40px; flex-shrink:0;}
-.brand-text{line-height:1.2;}
-.brand-text .name{font-family:'Fraunces', serif; font-weight:600; font-size:16.5px; color:var(--green-deep);}
-.brand-text .loc{font-size:11px; color:var(--muted); letter-spacing:0.03em;}
-.navright{display:flex; gap:12px; align-items:center;}
+  width:100%;
+  max-width:1180px;
 
-/* ===== Page hero ===== */
+  margin:0 auto;
+  padding:16px 24px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  min-width:0;
+}
+
+.emblem{
+  width:40px;
+  height:40px;
+  flex-shrink:0;
+}
+
+.brand-text{
+  line-height:1.2;
+  min-width:0;
+}
+
+.brand-text .name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:16.5px;
+  color:var(--green-deep);
+}
+
+.brand-text .loc{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.03em;
+}
+
+.navright{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-shrink:0;
+}
+
+/* ============================================
+   BUTTON
+   ============================================ */
+
+.btn{
+  padding:13px 22px;
+
+  border-radius:100px;
+
+  font-weight:600;
+  font-size:14.5px;
+
+  cursor:pointer;
+
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    background .2s;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  border:none;
+  font-family:inherit;
+
+  white-space:nowrap;
+}
+
+.btn-primary{
+  background:linear-gradient(
+    90deg,
+    var(--green-deep),
+    var(--green)
+  );
+
+  color:#fff;
+
+  box-shadow:
+    0 10px 24px rgba(47,107,79,0.3);
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(47,107,79,0.4);
+}
+
+.btn-outline{
+  background:var(--white);
+
+  border:1.5px solid var(--green);
+
+  color:var(--green-deep);
+}
+
+.btn-outline:hover{
+  transform:translateY(-2px);
+  background:var(--green-soft);
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
 .pagehero{
-  padding:56px 0 40px; text-align:center;
+  width:100%;
+
+  padding:56px 0 40px;
+
+  text-align:center;
+
   border-bottom:1px solid var(--line);
 }
+
 .pagehero .eyebrow{
-  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
-  color:var(--gold); text-transform:uppercase; margin-bottom:10px;
+  display:inline-block;
+
+  font-size:12.5px;
+  font-weight:700;
+
+  letter-spacing:0.08em;
+
+  color:var(--gold);
+
+  text-transform:uppercase;
+
+  margin-bottom:10px;
 }
-.pagehero h1{font-size:34px;}
-.pagehero p{color:var(--muted); max-width:520px; margin:14px auto 0; font-size:15.5px;}
 
-section{position:relative; z-index:1; padding:50px 0;}
+.pagehero h1{
+  font-size:34px;
+}
 
-/* ===== Cards ===== */
+.pagehero p{
+  color:var(--muted);
+
+  max-width:520px;
+
+  margin:14px auto 0;
+
+  font-size:15.5px;
+}
+
+section{
+  position:relative;
+  z-index:1;
+
+  padding:50px 0;
+}
+
+/* ============================================
+   CARD
+   ============================================ */
+
 .card{
-  background:var(--glass); backdrop-filter:blur(10px);
-  border:1px solid var(--line); border-radius:var(--radius);
+  width:100%;
+
+  background:var(--glass);
+
+  backdrop-filter:blur(10px);
+
+  border:1px solid var(--line);
+
+  border-radius:var(--radius);
+
   box-shadow:var(--shadow);
 }
-.card.pad{padding:30px;}
 
-/* ===== Buttons ===== */
-.btn{
-  padding:13px 22px; border-radius:100px; font-weight:600; font-size:14.5px;
-  cursor:pointer; transition:transform .2s, box-shadow .2s; display:inline-block;
-  border:none; font-family:inherit;
+.card.pad{
+  padding:30px;
 }
-.btn-primary{background:linear-gradient(90deg, var(--green-deep), var(--green)); color:#fff; box-shadow:0 10px 24px rgba(47,107,79,0.3);}
-.btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(47,107,79,0.4);}
-.btn-primary:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
-.btn-outline{background:var(--white); border:1.5px solid var(--green); color:var(--green-deep);}
-.btn-outline:hover{transform:translateY(-2px); background:var(--green-soft);}
-.btn:disabled{opacity:.55; cursor:not-allowed; transform:none;}
 
-/* ===== Login ===== */
-.login-wrap{max-width:440px; margin:40px auto;}
+/* ============================================
+   LOGIN
+   ============================================ */
+
+.login-wrap{
+  width:100%;
+  max-width:440px;
+
+  margin:40px auto;
+}
+
 .login-wrap .eyebrow{
-  display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:0.08em;
-  color:var(--gold); text-transform:uppercase; margin-bottom:8px;
-}
-.login-wrap h1{font-size:28px; margin-bottom:6px;}
-.login-wrap p{color:var(--muted); font-size:14px; margin-bottom:22px;}
+  display:inline-block;
 
-.form{display:grid; gap:14px;}
-.form label{font-size:13px; font-weight:700; color:var(--green-deep); margin-bottom:2px; display:block;}
+  font-size:12.5px;
+  font-weight:700;
+
+  letter-spacing:0.08em;
+
+  color:var(--gold);
+
+  text-transform:uppercase;
+
+  margin-bottom:8px;
+}
+
+.login-wrap h1{
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+.login-wrap p{
+  color:var(--muted);
+
+  font-size:14px;
+
+  margin-bottom:22px;
+}
+
+.form{
+  display:grid;
+  gap:14px;
+}
+
+.form label{
+  font-size:13px;
+  font-weight:700;
+
+  color:var(--green-deep);
+
+  margin-bottom:2px;
+
+  display:block;
+}
+
 .form input,
 .form textarea,
 .form select{
-  width:100%; padding:13px 16px; border-radius:12px;
-  border:1.5px solid var(--line); font-family:inherit; font-size:14.5px;
-  background:var(--white); color:var(--ink); resize:vertical;
+  width:100%;
+
+  padding:13px 16px;
+
+  border-radius:12px;
+
+  border:1.5px solid var(--line);
+
+  font-family:inherit;
+
+  font-size:14.5px;
+
+  background:var(--white);
+
+  color:var(--ink);
+
+  resize:vertical;
 }
+
 .form input:focus,
 .form textarea:focus,
-.form select:focus{outline:none; border-color:var(--green);}
-.msg{font-size:13.5px; margin-top:2px; min-height:20px;}
-.msg.ok{color:var(--green-deep);}
-.msg.err{color:#a33;}
-.hidden{display:none !important;}
+.form select:focus{
+  outline:none;
+  border-color:var(--green);
+}
 
-/* ===== Stats ===== */
-.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px;}
+.msg{
+  font-size:13.5px;
+  margin-top:2px;
+  min-height:20px;
+}
+
+.msg.ok{
+  color:var(--green-deep);
+}
+
+.msg.err{
+  color:#a33;
+}
+
+/* ============================================
+   STATS
+   ============================================ */
+
+.stats{
+  width:100%;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap:16px;
+
+  margin-bottom:24px;
+}
+
 .stat{
-  padding:20px; border:1px solid var(--line); border-radius:16px;
-  background:var(--cream); text-align:left;
-}
-.stat b{display:block; font-family:'Fraunces', serif; font-size:28px; color:var(--green-deep); font-weight:600;}
-.stat span{font-size:12.5px; color:var(--muted);}
+  min-width:0;
 
-/* ===== Table ===== */
-.table-wrap{overflow:auto;}
-table{width:100%; border-collapse:collapse; min-width:900px;}
-th,td{padding:14px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; font-size:13.5px;}
-th{color:var(--green-deep); background:var(--green-soft); font-size:12px; font-weight:700; letter-spacing:0.02em;}
-tbody tr:hover{background:rgba(47,107,79,0.04);}
+  padding:20px;
+
+  border:1px solid var(--line);
+
+  border-radius:16px;
+
+  background:var(--cream);
+
+  text-align:left;
+}
+
+.stat b{
+  display:block;
+
+  font-family:'Fraunces', serif;
+
+  font-size:28px;
+
+  color:var(--green-deep);
+
+  font-weight:600;
+}
+
+.stat span{
+  font-size:12.5px;
+  color:var(--muted);
+}
+
+/* ============================================
+   TABLE
+   ============================================ */
+
+/*
+   Ini penting untuk HP.
+   Tabel tetap punya lebar agar kolom tidak
+   terlalu kecil, tetapi bisa digeser ke samping.
+*/
+
+.table-wrap{
+  width:100%;
+  max-width:100%;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  -webkit-overflow-scrolling:touch;
+
+  border-radius:12px;
+}
+
+table{
+  width:100%;
+  min-width:900px;
+
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px 12px;
+
+  border-bottom:1px solid var(--line);
+
+  text-align:left;
+  vertical-align:top;
+
+  font-size:13.5px;
+}
+
+th{
+  color:var(--green-deep);
+
+  background:var(--green-soft);
+
+  font-size:12px;
+
+  font-weight:700;
+
+  letter-spacing:0.02em;
+}
+
+tbody tr:hover{
+  background:rgba(47,107,79,0.04);
+}
+
 .badge{
-  display:inline-block; padding:5px 11px; border-radius:999px; font-size:11px;
-  font-weight:700; background:var(--gold); color:#fff; letter-spacing:0.02em;
-}
-.badge.done{background:var(--green);}
-.token{font-family:monospace; font-weight:700; letter-spacing:.03em; color:var(--green-deep);}
+  display:inline-block;
 
-/* ===== Modal ===== */
-.modal{
-  position:fixed; inset:0; background:rgba(28,68,50,0.45);
-  display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;
-  backdrop-filter:blur(3px);
+  padding:5px 11px;
+
+  border-radius:999px;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  background:var(--gold);
+
+  color:#fff;
+
+  letter-spacing:0.02em;
 }
+
+.badge.done{
+  background:var(--green);
+}
+
+.token{
+  font-family:monospace;
+
+  font-weight:700;
+
+  letter-spacing:.03em;
+
+  color:var(--green-deep);
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(28,68,50,0.45);
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:100;
+
+  backdrop-filter:blur(3px);
+
+  overflow-y:auto;
+}
+
 .modal-card{
-  background:var(--white); border-radius:var(--radius); padding:26px;
-  max-width:600px; width:100%; box-shadow:0 30px 70px rgba(28,68,50,0.25);
+  width:100%;
+  max-width:600px;
+
+  max-height:90vh;
+
+  overflow-y:auto;
+
+  background:var(--white);
+
+  border-radius:var(--radius);
+
+  padding:26px;
+
+  box-shadow:
+    0 30px 70px rgba(28,68,50,0.25);
+
   border:1px solid var(--line);
 }
-.modal-head{display:flex; justify-content:space-between; gap:15px; align-items:center; margin-bottom:16px;}
-.modal-head h2{font-size:22px;}
-.close{border:none; background:none; font-size:26px; cursor:pointer; color:var(--muted); line-height:1;}
-.close:hover{color:var(--green-deep);}
+
+.modal-head{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  align-items:center;
+
+  margin-bottom:16px;
+}
+
+.modal-head h2{
+  font-size:22px;
+}
+
+.close{
+  border:none;
+
+  background:none;
+
+  font-size:26px;
+
+  cursor:pointer;
+
+  color:var(--muted);
+
+  line-height:1;
+}
+
+.close:hover{
+  color:var(--green-deep);
+}
+
 .reply-info{
-  background:var(--cream); border:1px solid var(--line); padding:15px;
-  border-radius:14px; margin-bottom:16px; font-size:13.5px; color:var(--muted);
+  background:var(--cream);
+
+  border:1px solid var(--line);
+
+  padding:15px;
+
+  border-radius:14px;
+
+  margin-bottom:16px;
+
+  font-size:13.5px;
+
+  color:var(--muted);
+
+  overflow-wrap:anywhere;
 }
-.reply-info b{color:var(--green-deep);}
 
-/* ===== Reveal ===== */
-.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
-.reveal.in{opacity:1; transform:none;}
+.reply-info b{
+  color:var(--green-deep);
+}
 
-/* ===== Footer ===== */
+/* ============================================
+   REVEAL
+   ============================================ */
+
+.reveal{
+  opacity:0;
+
+  transform:translateY(18px);
+
+  transition:
+    opacity .6s ease,
+    transform .6s ease;
+}
+
+.reveal.in{
+  opacity:1;
+  transform:none;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
 footer{
-  background:var(--green-deep); color:#e8f0ea; padding:36px 0 22px; position:relative; z-index:1; margin-top:auto;
+  width:100%;
+
+  background:var(--green-deep);
+
+  color:#e8f0ea;
+
+  padding:36px 0 22px;
+
+  position:relative;
+
+  z-index:1;
+
+  margin-top:auto;
 }
+
 .footer-bottom{
-  text-align:center; font-size:12.5px; color:#a9c4b7;
+  width:100%;
+
+  text-align:center;
+
+  font-size:12.5px;
+
+  color:#a9c4b7;
 }
+
+/* ============================================
+   TABLET
+   ============================================ */
 
 @media (max-width:860px){
-  .stats{grid-template-columns:1fr;}
-  .pagehero h1{font-size:28px;}
-  .navinner{flex-wrap:wrap; gap:10px;}
+
+  .container{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  .navinner{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .pagehero{
+    padding:42px 0 32px;
+  }
+
+  .pagehero h1{
+    font-size:28px;
+  }
+
+  .pagehero p{
+    font-size:14px;
+    max-width:600px;
+  }
+
+  .card.pad{
+    padding:22px;
+  }
 }
+
+/* ============================================
+   HP
+   ============================================ */
+
+@media (max-width:600px){
+
+  body{
+    width:100%;
+    overflow-x:hidden;
+  }
+
+  /* NAV HP */
+
+  .navinner{
+    width:100%;
+
+    padding:12px 14px;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+  }
+
+  .brand{
+    flex:1 1 auto;
+  }
+
+  .emblem{
+    width:36px;
+    height:36px;
+  }
+
+  .brand-text .name{
+    font-size:15px;
+  }
+
+  .brand-text .loc{
+    font-size:9.5px;
+  }
+
+  .navright{
+    gap:6px;
+  }
+
+  .navright .btn{
+    padding:9px 13px;
+    font-size:12px;
+  }
+
+  /* HERO */
+
+  .pagehero{
+    padding:34px 0 28px;
+  }
+
+  .pagehero h1{
+    font-size:25px;
+  }
+
+  .pagehero p{
+    font-size:13px;
+
+    padding:0 8px;
+  }
+
+  .pagehero .eyebrow{
+    font-size:10.5px;
+  }
+
+  /* CONTAINER */
+
+  .container{
+    width:100%;
+
+    padding-left:14px;
+    padding-right:14px;
+  }
+
+  section{
+    padding:28px 0;
+  }
+
+  /* LOGIN */
+
+  .login-wrap{
+    max-width:none;
+
+    margin:20px auto;
+  }
+
+  .login-wrap h1{
+    font-size:25px;
+  }
+
+  .card.pad{
+    padding:18px;
+    border-radius:16px;
+  }
+
+  /* STATS */
+
+  .stats{
+    gap:10px;
+
+    margin-bottom:16px;
+  }
+
+  .stat{
+    padding:16px;
+  }
+
+  .stat b{
+    font-size:25px;
+  }
+
+  .stat span{
+    font-size:11.5px;
+  }
+
+  /* DASHBOARD HEADER */
+
+  #dashboard .card.pad > div:first-child{
+    align-items:flex-start !important;
+  }
+
+  #dashboard .card.pad > div:first-child h2{
+    font-size:20px !important;
+  }
+
+  #refreshBtn{
+    padding:10px 15px;
+
+    font-size:12px;
+  }
+
+  /* TABLE */
+
+  .table-wrap{
+    width:100%;
+
+    overflow-x:auto;
+
+    border-radius:10px;
+  }
+
+  table{
+    min-width:900px;
+  }
+
+  th,
+  td{
+    padding:11px 10px;
+    font-size:12px;
+  }
+
+  th{
+    font-size:10.5px;
+  }
+
+  .badge{
+    font-size:10px;
+    padding:5px 9px;
+  }
+
+  .reply-action{
+    padding:9px 14px;
+    font-size:11.5px;
+  }
+
+  /* MODAL */
+
+  .modal{
+    padding:12px;
+  }
+
+  .modal-card{
+    padding:18px;
+
+    max-height:92vh;
+
+    border-radius:16px;
+  }
+
+  .modal-head h2{
+    font-size:19px;
+  }
+
+  /* FOOTER */
+
+  footer{
+    width:100%;
+
+    padding:28px 0 18px;
+  }
+
+  .footer-bottom{
+    font-size:10.5px;
+
+    padding:0 10px;
+  }
+
+  /* MOTIF */
+
+  .motif{
+    height:10px;
+
+    background-size:10px 10px;
+
+    background-position:
+      0 0,
+      5px 0,
+      0 0,
+      5px 0;
+  }
+}
+
+/* ============================================
+   HP SANGAT KECIL
+   ============================================ */
+
+@media (max-width:380px){
+
+  .navinner{
+    padding:10px 10px;
+  }
+
+  .navright{
+    width:100%;
+
+    justify-content:flex-end;
+  }
+
+  .navright .btn{
+    font-size:11px;
+    padding:8px 12px;
+  }
+
+  .pagehero h1{
+    font-size:23px;
+  }
+
+  .container{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .card.pad{
+    padding:15px;
+  }
+
+  .stat{
+    padding:14px;
+  }
+}
+
+/* ============================================
+   REDUCE MOTION
+   ============================================ */
+
 @media (prefers-reduced-motion: reduce){
-  *{animation:none !important; transition:none !important;}
+
+  *{
+    animation:none !important;
+    transition:none !important;
+  }
 }
 </style>
 </head>
+
 <body>
+
+<!-- ============================================
+     NAV
+     ============================================ -->
 
 <nav>
   <div class="navinner">
+
     <a class="brand" href="index.html">
-      <svg class="emblem" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="23" fill="#fbfaf5" stroke="#bf9433" stroke-width="1.5"/>
-        <path d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z" fill="#2f6b4f"/>
-        <path d="M24 26v12" stroke="#2f6b4f" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2" stroke="#bf9433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+      <svg class="emblem"
+           viewBox="0 0 48 48"
+           xmlns="http://www.w3.org/2000/svg">
+
+        <circle
+          cx="24"
+          cy="24"
+          r="23"
+          fill="#fbfaf5"
+          stroke="#bf9433"
+          stroke-width="1.5"/>
+
+        <path
+          d="M24 10c-1 5-4 7-4 12 0 2.2 1.8 4 4 4s4-1.8 4-4c0-5-3-7-4-12z"
+          fill="#2f6b4f"/>
+
+        <path
+          d="M24 26v12"
+          stroke="#2f6b4f"
+          stroke-width="1.6"
+          stroke-linecap="round"/>
+
+        <path
+          d="M9 34c4-3 8-3 12 0s8 3 12 0s6-2 6-2"
+          stroke="#bf9433"
+          stroke-width="1.6"
+          fill="none"
+          stroke-linecap="round"/>
+
       </svg>
+
       <span class="brand-text">
-        <span class="name" style="display:block;">Semparuk</span>
-        <span class="loc">Panel Admin Pengaduan</span>
+        <span class="name" style="display:block;">
+          Semparuk
+        </span>
+
+        <span class="loc">
+          Panel Admin Pengaduan
+        </span>
       </span>
+
     </a>
+
     <div class="navright">
-      <a class="btn btn-outline" href="kontak.html">← Kembali</a>
-      <button class="btn btn-primary hidden" id="logoutBtn">Keluar</button>
+
+      <a
+        class="btn btn-outline"
+        href="kontak.html">
+        ← Kembali
+      </a>
+
+      <button
+        class="btn btn-primary hidden"
+        id="logoutBtn">
+        Keluar
+      </button>
+
     </div>
+
   </div>
 </nav>
 
 <div class="motif"></div>
 
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+
 <section class="pagehero">
+
   <div class="container">
-    <span class="eyebrow reveal in">Panel Internal</span>
-    <h1 class="reveal in">🔐 Admin Pengaduan</h1>
-    <p class="reveal in">Kelola dan tanggapi pengaduan yang dikirimkan oleh masyarakat Desa Semparuk.</p>
+
+    <span class="eyebrow reveal in">
+      Panel Internal
+    </span>
+
+    <h1 class="reveal in">
+      🔐 Admin Pengaduan
+    </h1>
+
+    <p class="reveal in">
+      Kelola dan tanggapi pengaduan yang dikirimkan
+      oleh masyarakat Desa Semparuk.
+    </p>
+
   </div>
+
 </section>
+
+
+<!-- ============================================
+     MAIN
+     ============================================ -->
 
 <main class="container">
 
-  <section id="loginSection" class="login-wrap" style="padding-top:20px;">
+
+  <!-- LOGIN -->
+
+  <section
+    id="loginSection"
+    class="login-wrap"
+    style="padding-top:20px;">
+
     <div class="card pad reveal in">
-      <span class="eyebrow">Masuk</span>
-      <h1>Login Admin</h1>
-      <p>Masuk untuk melihat dan menanggapi pengaduan masyarakat.</p>
-      <form class="form" id="loginForm">
+
+      <span class="eyebrow">
+        Masuk
+      </span>
+
+      <h1>
+        Login Admin
+      </h1>
+
+      <p>
+        Masuk untuk melihat dan menanggapi
+        pengaduan masyarakat.
+      </p>
+
+      <form
+        class="form"
+        id="loginForm">
+
         <div>
-          <label>Username</label>
-          <input id="username" required autocomplete="username">
+
+          <label>
+            Username
+          </label>
+
+          <input
+            id="username"
+            required
+            autocomplete="username">
+
         </div>
+
+
         <div>
-          <label>Password</label>
-          <input id="password" type="password" required autocomplete="current-password">
+
+          <label>
+            Password
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            required
+            autocomplete="current-password">
+
         </div>
-        <button class="btn btn-primary" id="loginBtn">Login</button>
-        <div class="msg" id="loginMsg"></div>
+
+
+        <button
+          class="btn btn-primary"
+          id="loginBtn">
+
+          Login
+
+        </button>
+
+        <div
+          class="msg"
+          id="loginMsg">
+        </div>
+
       </form>
+
     </div>
+
   </section>
 
-  <section id="dashboard" class="hidden" style="padding-top:10px;">
+
+  <!-- DASHBOARD -->
+
+  <section
+    id="dashboard"
+    class="hidden"
+    style="padding-top:10px;">
+
+    <!-- STATISTIK -->
+
     <div class="stats reveal in">
-      <div class="stat"><b id="totalCount">0</b><span>Total Pengaduan</span></div>
-      <div class="stat"><b id="pendingCount">0</b><span>Belum Ditanggapi</span></div>
-      <div class="stat"><b id="doneCount">0</b><span>Sudah Ditanggapi</span></div>
+
+      <div class="stat">
+
+        <b id="totalCount">
+          0
+        </b>
+
+        <span>
+          Total Pengaduan
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <b id="pendingCount">
+          0
+        </b>
+
+        <span>
+          Belum Ditanggapi
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <b id="doneCount">
+          0
+        </b>
+
+        <span>
+          Sudah Ditanggapi
+        </span>
+
+      </div>
+
     </div>
 
+
+    <!-- DAFTAR PENGADUAN -->
+
     <div class="card pad reveal in">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:10px;
+          margin-bottom:18px;
+          flex-wrap:wrap;
+        ">
+
         <div>
-          <span class="eyebrow" style="margin-bottom:4px; display:inline-block;">Layanan Masyarakat</span>
-          <h2 style="font-size:22px;">Daftar Pengaduan</h2>
+
+          <span
+            class="eyebrow"
+            style="
+              margin-bottom:4px;
+              display:inline-block;
+            ">
+
+            Layanan Masyarakat
+
+          </span>
+
+          <h2 style="font-size:22px;">
+            Daftar Pengaduan
+          </h2>
+
         </div>
-        <button class="btn btn-outline" id="refreshBtn">↻ Refresh</button>
+
+
+        <button
+          class="btn btn-outline"
+          id="refreshBtn">
+
+          ↻ Refresh
+
+        </button>
+
       </div>
-      <div id="adminMsg" class="msg"></div>
+
+
+      <div
+        id="adminMsg"
+        class="msg">
+      </div>
+
+
+      <!-- TABLE WRAPPER -->
       <div class="table-wrap">
+
         <table>
-          <thead><tr><th>Token</th><th>Waktu</th><th>Nama</th><th>Pengaduan</th><th>Status</th><th>Tanggapan</th><th>Aksi</th></tr></thead>
-          <tbody id="aduanTable"><tr><td colspan="7">Memuat...</td></tr></tbody>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Token
+              </th>
+
+              <th>
+                Waktu
+              </th>
+
+              <th>
+                Nama
+              </th>
+
+              <th>
+                Pengaduan
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Tanggapan
+              </th>
+
+              <th>
+                Aksi
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="aduanTable">
+
+            <tr>
+
+              <td colspan="7">
+                Memuat...
+              </td>
+
+            </tr>
+
+          </tbody>
+
         </table>
+
       </div>
+
     </div>
+
   </section>
 
 </main>
 
+
+<!-- MOTIF -->
+
 <div class="motif"></div>
 
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+
 <footer>
+
   <div class="container">
+
     <div class="footer-bottom">
-      © 2026 Semparuk. Seluruh hak dilindungi. · Panel Admin Pengaduan
+
+      © 2026 Semparuk.
+      Seluruh hak dilindungi.
+      · Panel Admin Pengaduan
+
     </div>
+
   </div>
+
 </footer>
 
-<div class="modal hidden" id="replyModal">
+
+<!-- ============================================
+     MODAL TANGGAPAN
+     ============================================ -->
+
+<div
+  class="modal hidden"
+  id="replyModal">
+
   <div class="modal-card">
+
     <div class="modal-head">
-      <h2>💬 Tanggapi Pengaduan</h2>
-      <button class="close" id="closeModal">×</button>
+
+      <h2>
+        💬 Tanggapi Pengaduan
+      </h2>
+
+      <button
+        class="close"
+        id="closeModal">
+
+        ×
+
+      </button>
+
     </div>
-    <div id="replyInfo" class="reply-info"></div>
-    <form class="form" id="replyForm">
-      <textarea id="replyText" rows="7" maxlength="1500" placeholder="Tulis tanggapan admin..." required></textarea>
-      <button class="btn btn-primary" id="replyBtn">Kirim Tanggapan</button>
-      <div class="msg" id="replyMsg"></div>
+
+
+    <div
+      id="replyInfo"
+      class="reply-info">
+    </div>
+
+
+    <form
+      class="form"
+      id="replyForm">
+
+      <textarea
+        id="replyText"
+        rows="7"
+        maxlength="1500"
+        placeholder="Tulis tanggapan admin..."
+        required>
+      </textarea>
+
+
+      <button
+        class="btn btn-primary"
+        id="replyBtn">
+
+        Kirim Tanggapan
+
+      </button>
+
+
+      <div
+        class="msg"
+        id="replyMsg">
+      </div>
+
     </form>
+
   </div>
+
 </div>
 
+
+<!-- ============================================
+     REVEAL SCRIPT
+     ============================================ -->
+
 <script>
-// Reveal saat discroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const observer = new IntersectionObserver(
+  (entries) => {
+
+    entries.forEach(e => {
+
+      if(e.isIntersecting){
+
+        e.target.classList.add('in');
+
+      }
+
+    });
+
+  },
+  {
+    threshold:0.15
+  }
+);
+
+document
+  .querySelectorAll('.reveal')
+  .forEach(el => observer.observe(el));
+
 </script>
+
+
+<!-- ============================================
+     ADMIN JAVASCRIPT
+     ============================================ -->
+
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbzFmLgF2K6D_n80rQp0Y2t2nvku5K4hZspA6j8kJ_1GXb0V4d6MKWJJurL4PtromlNM-Q/exec";
-let sessionToken = localStorage.getItem('semparukAdminSession') || '';
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzFmLgF2K6D_n80rQp0Y2t2nvku5K4hZspA6j8kJ_1GXb0V4d6MKWJJurL4PtromlNM-Q/exec";
+
+
+let sessionToken =
+  localStorage.getItem('semparukAdminSession') || '';
+
 let currentToken = '';
 
-const loginSection = document.getElementById('loginSection');
-const dashboard = document.getElementById('dashboard');
-const logoutBtn = document.getElementById('logoutBtn');
 
-function esc(s) {
-  const d = document.createElement('div');
-  d.textContent = s ?? '';
+const loginSection =
+  document.getElementById('loginSection');
+
+const dashboard =
+  document.getElementById('dashboard');
+
+const logoutBtn =
+  document.getElementById('logoutBtn');
+
+
+/* ============================================
+   ESCAPE HTML
+   ============================================ */
+
+function esc(s){
+
+  const d =
+    document.createElement('div');
+
+  d.textContent =
+    s ?? '';
+
   return d.innerHTML;
+
 }
 
-function showDashboard() {
+
+/* ============================================
+   DASHBOARD
+   ============================================ */
+
+function showDashboard(){
+
   loginSection.classList.add('hidden');
+
   dashboard.classList.remove('hidden');
+
   logoutBtn.classList.remove('hidden');
+
   loadComplaints();
+
 }
 
-function showLogin() {
+
+/* ============================================
+   LOGIN
+   ============================================ */
+
+function showLogin(){
+
   loginSection.classList.remove('hidden');
+
   dashboard.classList.add('hidden');
+
   logoutBtn.classList.add('hidden');
+
 }
 
-async function postForm(params) {
-  const body = new URLSearchParams(params);
-  const res = await fetch(API_URL, {method:'POST', body});
+
+/* ============================================
+   POST FORM
+   ============================================ */
+
+async function postForm(params){
+
+  const body =
+    new URLSearchParams(params);
+
+  const res =
+    await fetch(
+      API_URL,
+      {
+        method:'POST',
+        body
+      }
+    );
+
   return await res.json();
+
 }
 
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btn = document.getElementById('loginBtn');
-  const msg = document.getElementById('loginMsg');
-  btn.disabled = true; btn.textContent = 'Memeriksa...'; msg.textContent = ''; msg.className = 'msg';
-  try {
-    const data = await postForm({
-      action:'loginAdmin',
-      username:document.getElementById('username').value.trim(),
-      password:document.getElementById('password').value
-    });
-    if (!data.success) throw new Error(data.message || 'Login gagal.');
-    sessionToken = data.sessionToken;
-    localStorage.setItem('semparukAdminSession', sessionToken);
-    showDashboard();
-  } catch(err) {
-    msg.textContent = err.message;
-    msg.className = 'msg err';
-  } finally {
-    btn.disabled = false; btn.textContent = 'Login';
-  }
-});
 
-async function loadComplaints() {
-  const tbody = document.getElementById('aduanTable');
-  const msg = document.getElementById('adminMsg');
-  tbody.innerHTML = '<tr><td colspan="7">Memuat...</td></tr>';
-  try {
-    const res = await fetch(API_URL + '?action=adminList&session=' + encodeURIComponent(sessionToken));
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message || 'Sesi tidak valid.');
-    const rows = data.data || [];
-    document.getElementById('totalCount').textContent = rows.length;
-    document.getElementById('pendingCount').textContent = rows.filter(x => x.status !== 'Sudah Ditanggapi').length;
-    document.getElementById('doneCount').textContent = rows.filter(x => x.status === 'Sudah Ditanggapi').length;
+/* ============================================
+   LOGIN FORM
+   ============================================ */
 
-    if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="7">Belum ada pengaduan.</td></tr>';
+document
+  .getElementById('loginForm')
+  .addEventListener(
+    'submit',
+    async (e) => {
+
+      e.preventDefault();
+
+
+      const btn =
+        document.getElementById('loginBtn');
+
+      const msg =
+        document.getElementById('loginMsg');
+
+
+      btn.disabled = true;
+
+      btn.textContent =
+        'Memeriksa...';
+
+      msg.textContent =
+        '';
+
+      msg.className =
+        'msg';
+
+
+      try{
+
+        const data =
+          await postForm({
+
+            action:'loginAdmin',
+
+            username:
+              document
+                .getElementById('username')
+                .value
+                .trim(),
+
+            password:
+              document
+                .getElementById('password')
+                .value
+
+          });
+
+
+        if(!data.success)
+
+          throw new Error(
+            data.message ||
+            'Login gagal.'
+          );
+
+
+        sessionToken =
+          data.sessionToken;
+
+
+        localStorage.setItem(
+          'semparukAdminSession',
+          sessionToken
+        );
+
+
+        showDashboard();
+
+
+      }catch(err){
+
+        msg.textContent =
+          err.message;
+
+        msg.className =
+          'msg err';
+
+
+      }finally{
+
+        btn.disabled = false;
+
+        btn.textContent =
+          'Login';
+
+      }
+
+    }
+  );
+
+
+/* ============================================
+   LOAD COMPLAINTS
+   ============================================ */
+
+async function loadComplaints(){
+
+  const tbody =
+    document.getElementById('aduanTable');
+
+  const msg =
+    document.getElementById('adminMsg');
+
+
+  tbody.innerHTML =
+    '<tr><td colspan="7">Memuat...</td></tr>';
+
+
+  try{
+
+    const res =
+      await fetch(
+        API_URL +
+        '?action=adminList&session=' +
+        encodeURIComponent(sessionToken)
+      );
+
+
+    const data =
+      await res.json();
+
+
+    if(!data.success)
+
+      throw new Error(
+        data.message ||
+        'Sesi tidak valid.'
+      );
+
+
+    const rows =
+      data.data || [];
+
+
+    document
+      .getElementById('totalCount')
+      .textContent =
+      rows.length;
+
+
+    document
+      .getElementById('pendingCount')
+      .textContent =
+      rows.filter(
+        x =>
+          x.status !== 'Sudah Ditanggapi'
+      ).length;
+
+
+    document
+      .getElementById('doneCount')
+      .textContent =
+      rows.filter(
+        x =>
+          x.status === 'Sudah Ditanggapi'
+      ).length;
+
+
+    if(!rows.length){
+
+      tbody.innerHTML =
+        '<tr><td colspan="7">Belum ada pengaduan.</td></tr>';
+
       return;
+
     }
 
-    tbody.innerHTML = rows.map(x => `
-      <tr>
-        <td><span class="token">${esc(x.token)}</span></td>
-        <td>${esc(x.timestamp)}</td>
-        <td>${esc(x.nama)}</td>
-        <td>${esc(x.pengaduan)}</td>
-        <td><span class="badge ${x.status === 'Sudah Ditanggapi' ? 'done' : ''}">${esc(x.status)}</span></td>
-        <td>${x.tanggapan ? esc(x.tanggapan) : '<span style="color:var(--muted)">Belum ada</span>'}</td>
-        <td><button class="btn btn-outline reply-action" data-token="${esc(x.token)}" data-pengaduan="${esc(x.pengaduan)}" data-tanggapan="${esc(x.tanggapan || '')}">Tanggapi</button></td>
-      </tr>
-    `).join('');
 
-    tbody.querySelectorAll('.reply-action').forEach(btn => {
-      btn.addEventListener('click', () => openReply(btn.dataset.token, btn.dataset.pengaduan, btn.dataset.tanggapan));
-    });
-  } catch(err) {
-    msg.textContent = err.message;
-    msg.className = 'msg err';
-    if (err.message.toLowerCase().includes('sesi')) {
-      sessionToken = ''; localStorage.removeItem('semparukAdminSession'); showLogin();
+    tbody.innerHTML =
+      rows.map(x => `
+
+        <tr>
+
+          <td>
+            <span class="token">
+              ${esc(x.token)}
+            </span>
+          </td>
+
+          <td>
+            ${esc(x.timestamp)}
+          </td>
+
+          <td>
+            ${esc(x.nama)}
+          </td>
+
+          <td>
+            ${esc(x.pengaduan)}
+          </td>
+
+          <td>
+
+            <span
+              class="badge ${
+                x.status === 'Sudah Ditanggapi'
+                  ? 'done'
+                  : ''
+              }">
+
+              ${esc(x.status)}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            ${
+              x.tanggapan
+                ? esc(x.tanggapan)
+                : '<span style="color:var(--muted)">Belum ada</span>'
+            }
+
+          </td>
+
+          <td>
+
+            <button
+              class="btn btn-outline reply-action"
+
+              data-token="${esc(x.token)}"
+
+              data-pengaduan="${esc(x.pengaduan)}"
+
+              data-tanggapan="${esc(
+                x.tanggapan || ''
+              )}">
+
+              Tanggapi
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      `).join('');
+
+
+    tbody
+      .querySelectorAll('.reply-action')
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            openReply(
+              btn.dataset.token,
+              btn.dataset.pengaduan,
+              btn.dataset.tanggapan
+            );
+
+          }
+        );
+
+      });
+
+
+  }catch(err){
+
+    msg.textContent =
+      err.message;
+
+    msg.className =
+      'msg err';
+
+
+    if(
+      err.message
+        .toLowerCase()
+        .includes('sesi')
+    ){
+
+      sessionToken = '';
+
+      localStorage.removeItem(
+        'semparukAdminSession'
+      );
+
+      showLogin();
+
     }
+
   }
+
 }
 
-function openReply(token, pengaduan, oldReply) {
-  currentToken = token;
-  document.getElementById('replyInfo').innerHTML = '<b>Token:</b> ' + esc(token) + '<br><br><b>Pengaduan:</b><br>' + esc(pengaduan);
-  document.getElementById('replyText').value = oldReply || '';
-  document.getElementById('replyMsg').textContent = '';
-  document.getElementById('replyModal').classList.remove('hidden');
+
+/* ============================================
+   OPEN REPLY
+   ============================================ */
+
+function openReply(
+  token,
+  pengaduan,
+  oldReply
+){
+
+  currentToken =
+    token;
+
+
+  document
+    .getElementById('replyInfo')
+    .innerHTML =
+
+      '<b>Token:</b> ' +
+      esc(token) +
+
+      '<br><br>' +
+
+      '<b>Pengaduan:</b><br>' +
+      esc(pengaduan);
+
+
+  document
+    .getElementById('replyText')
+    .value =
+    oldReply || '';
+
+
+  document
+    .getElementById('replyMsg')
+    .textContent =
+    '';
+
+
+  document
+    .getElementById('replyModal')
+    .classList
+    .remove('hidden');
+
 }
 
-function closeReply() {
-  document.getElementById('replyModal').classList.add('hidden');
-}
-document.getElementById('closeModal').addEventListener('click', closeReply);
-document.getElementById('replyModal').addEventListener('click', e => { if(e.target.id === 'replyModal') closeReply(); });
 
-document.getElementById('replyForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btn = document.getElementById('replyBtn');
-  const msg = document.getElementById('replyMsg');
-  btn.disabled = true; btn.textContent = 'Menyimpan...'; msg.textContent = ''; msg.className = 'msg';
-  try {
-    const data = await postForm({
-      action:'tanggapiPengaduan',
-      session:sessionToken,
-      token:currentToken,
-      tanggapan:document.getElementById('replyText').value.trim()
-    });
-    if (!data.success) throw new Error(data.message || 'Gagal menyimpan tanggapan.');
-    msg.textContent = 'Tanggapan berhasil disimpan.';
-    msg.className = 'msg ok';
-    setTimeout(() => { closeReply(); loadComplaints(); }, 600);
-  } catch(err) {
-    msg.textContent = err.message;
-    msg.className = 'msg err';
-  } finally {
-    btn.disabled = false; btn.textContent = 'Kirim Tanggapan';
+/* ============================================
+   CLOSE REPLY
+   ============================================ */
+
+function closeReply(){
+
+  document
+    .getElementById('replyModal')
+    .classList
+    .add('hidden');
+
+}
+
+
+document
+  .getElementById('closeModal')
+  .addEventListener(
+    'click',
+    closeReply
+  );
+
+
+document
+  .getElementById('replyModal')
+  .addEventListener(
+    'click',
+    e => {
+
+      if(
+        e.target.id ===
+        'replyModal'
+      ){
+
+        closeReply();
+
+      }
+
+    }
+  );
+
+
+/* ============================================
+   REPLY FORM
+   ============================================ */
+
+document
+  .getElementById('replyForm')
+  .addEventListener(
+    'submit',
+    async (e) => {
+
+      e.preventDefault();
+
+
+      const btn =
+        document.getElementById('replyBtn');
+
+      const msg =
+        document.getElementById('replyMsg');
+
+
+      btn.disabled = true;
+
+      btn.textContent =
+        'Menyimpan...';
+
+      msg.textContent =
+        '';
+
+      msg.className =
+        'msg';
+
+
+      try{
+
+        const data =
+          await postForm({
+
+            action:
+              'tanggapiPengaduan',
+
+            session:
+              sessionToken,
+
+            token:
+              currentToken,
+
+            tanggapan:
+              document
+                .getElementById('replyText')
+                .value
+                .trim()
+
+          });
+
+
+        if(!data.success)
+
+          throw new Error(
+            data.message ||
+            'Gagal menyimpan tanggapan.'
+          );
+
+
+        msg.textContent =
+          'Tanggapan berhasil disimpan.';
+
+        msg.className =
+          'msg ok';
+
+
+        setTimeout(
+          () => {
+
+            closeReply();
+
+            loadComplaints();
+
+          },
+          600
+        );
+
+
+      }catch(err){
+
+        msg.textContent =
+          err.message;
+
+        msg.className =
+          'msg err';
+
+
+      }finally{
+
+        btn.disabled = false;
+
+        btn.textContent =
+          'Kirim Tanggapan';
+
+      }
+
+    }
+  );
+
+
+/* ============================================
+   REFRESH
+   ============================================ */
+
+document
+  .getElementById('refreshBtn')
+  .addEventListener(
+    'click',
+    loadComplaints
+  );
+
+
+/* ============================================
+   LOGOUT
+   ============================================ */
+
+logoutBtn.addEventListener(
+  'click',
+  async () => {
+
+    try{
+
+      await postForm({
+
+        action:'logoutAdmin',
+
+        session:sessionToken
+
+      });
+
+    }catch(e){}
+
+
+    sessionToken = '';
+
+
+    localStorage.removeItem(
+      'semparukAdminSession'
+    );
+
+
+    showLogin();
+
   }
-});
+);
 
-document.getElementById('refreshBtn').addEventListener('click', loadComplaints);
 
-logoutBtn.addEventListener('click', async () => {
-  try { await postForm({action:'logoutAdmin', session:sessionToken}); } catch(e) {}
-  sessionToken = '';
-  localStorage.removeItem('semparukAdminSession');
+/* ============================================
+   CEK SESSION
+   ============================================ */
+
+if(sessionToken)
+
+  showDashboard();
+
+else
+
   showLogin();
-});
 
-if (sessionToken) showDashboard();
-else showLogin();
 </script>
+
 </body>
 </html>
